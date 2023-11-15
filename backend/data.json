@@ -1,0 +1,26 @@
+[
+  {
+    "user_id": "583c3ac3f38e84297c002546",
+    "email": "test@test.com",
+    "name": "Danil",
+    "folders": {
+      "Eng": {
+        "Verbs": ["to do", "to be", "to go", "to find"],
+        "adjectives": ["hot", "cold", "beautiful"]
+      },
+      "Datch": {}
+    }
+  },
+  {
+    "user_id": "183c3ac3f38e84297c002548",
+    "email": "test@test.com",
+    "name": "Darya",
+    "folders": {
+      "Eng": {
+        "Verbs": ["to do", "to be", "to go", "to find"],
+        "adjectives": ["hot", "cold", "beautiful"]
+      },
+      "Datch": {}
+    }
+  }
+]

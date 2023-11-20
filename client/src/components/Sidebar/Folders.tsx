@@ -1,31 +1,33 @@
 import React from "react";
 import styles from "./Sidebar.module.css";
+import { useAppSelector } from "../../Hooks";
+import { useNavigate } from "react-router-dom";
 
 function Folders() {
+  const data = useAppSelector((state) => state.userData);
+
+  const navigate = useNavigate();
+
+  const foldersNavigation = (folder: any) => {
+    navigate(`/folder/${folder}`);
+  };
+
   return (
     <div>
       <h2>folders</h2>
       <ul className={styles.list}>
-        <li>
-          <span>boardme development</span>
-        </li>
-        <li>
-          <span>Feature lists</span>
-        </li>
-        <li>
-          <span>Marketing</span>
-        </li>
-        <li>
-          <span>UIDD development</span>
-        </li>
-        <li>
-          <span>Topics</span>
-        </li>
-        <li>
-          <span>Bugs and fixes</span>
-        </li>
+        {data.folders
+          ? Object.keys(data.folders).map((folder: any) => (
+              <li onClick={() => foldersNavigation(folder)} key={Math.random()}>
+                <span>{folder}</span>
+              </li>
+            ))
+          : ""}
       </ul>
-      <span className={styles.view_btn}>View all</span>
+
+      <span onClick={() => navigate("/")} className={styles.view_btn}>
+        View all
+      </span>
     </div>
   );
 }

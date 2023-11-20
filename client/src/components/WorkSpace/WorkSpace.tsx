@@ -1,16 +1,22 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import styles from "./WorkSpace.module.css";
+import Folders from "./Pages/Folders";
+import { useAppSelector } from "../../Hooks";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import Dictionaries from "./Pages/Dictionaries";
 
-function WorkSpace() {
+const WorkSpace = () => {
+  const data = useAppSelector((state) => state.userData);
+  console.log(data);
+
   return (
     <div className={styles.workspace}>
-      <h2>Folders</h2>
-      <div className={styles.card}>
-        <h3>M</h3>
-        <span>Marketing</span>
-      </div>
+      <Routes>
+        <Route path='/' element={<Folders data={data} />}></Route>
+        <Route path='/folder/:name' element={<Dictionaries />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default WorkSpace;

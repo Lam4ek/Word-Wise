@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import styles from "./WorkSpace.module.css";
-import Folders from "./Pages/Folders";
+import Folders from "./Folder/Folders";
 import { useAppSelector } from "../../Hooks";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import Dictionaries from "./Pages/Dictionaries";
+import Modules from "./TrainingModule/Modules";
+import Terms from "./Term/Terms";
 
 const WorkSpace = () => {
   const data = useAppSelector((state) => state.userData);
@@ -12,8 +13,13 @@ const WorkSpace = () => {
   return (
     <div className={styles.workspace}>
       <Routes>
-        <Route path='/' element={<Folders data={data} />}></Route>
-        <Route path='/folder/:name' element={<Dictionaries />} />
+        <Route path='/' element={<Folders data={data} />} />
+        <Route path='/folder/:name' element={<Modules />} />
+        <Route path='/folder/:name/module/:name' element={<Terms />} />
+        {/* <Route
+          path='/folder/:name/module/:name/program/:name'
+          element={<Folders data={data} />}
+        /> */}
       </Routes>
     </div>
   );

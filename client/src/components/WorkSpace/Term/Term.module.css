@@ -1,0 +1,75 @@
+.card {
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 50px;
+}
+
+.card:first-child {
+  margin-top: 0;
+}
+
+.card_header {
+  background-color: #252531;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #d0d0d0;
+  padding: 15px 20px;
+}
+
+.term {
+  margin-top: 2px;
+  background-color: #252531;
+  color: #d0d0d0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+}
+
+.term div {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+.term_line {
+  border-bottom: 2px solid #d0d0d0;
+}
+
+.cards_wrapper {
+  overflow: auto;
+  height: 88%;
+  padding-right: 5px;
+}
+
+.cards_wrapper::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f9f9fd;
+}
+
+.cards_wrapper::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #d0d0d0;
+}
+
+.cards_wrapper::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: #f9f9fd;
+}
+
+.programs {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 25px;
+  color: #d0d0d0;
+}
+
+.programs div {
+  background-color: #252531;
+  width: 20%;
+  display: flex;
+  font-size: 18px;
+  padding: 10px 20px;
+}

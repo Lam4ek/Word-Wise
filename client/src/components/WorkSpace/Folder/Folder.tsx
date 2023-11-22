@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./Folders.module.css";
+import styles from "../WorkSpace.module.css";
 
 interface ICard {
   folder: any;
-  handleNavigation: (folder: any) => void;
+  handleNavigation: (folder: string) => void;
 }
 
 const Card: React.FC<ICard> = ({ folder, handleNavigation }) => {

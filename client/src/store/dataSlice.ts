@@ -10,12 +10,6 @@ const info = {
       adjectives: ["hot", "cold", "beautiful"],
     },
     Datch: {},
-    Datch1: {},
-    Datch2: {},
-    Datch3: {},
-    Datch4: {},
-    Datch5: {},
-    Datch6: {},
   },
 };
 

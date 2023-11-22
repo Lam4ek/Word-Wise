@@ -1,7 +1,7 @@
 import React from "react";
 import Folder from "./Folder";
 import { TData } from "../../../types/data";
-import styles from "./Folders.module.css";
+import styles from "../WorkSpace.module.css";
 import { useNavigate } from "react-router-dom";
 
 interface ICards {
@@ -11,7 +11,7 @@ interface ICards {
 const Cards: React.FC<ICards> = ({ data }) => {
   const navigate = useNavigate();
 
-  const handleNavigation = (folder: any) => {
+  const handleNavigation = (folder: string) => {
     navigate(`/folder/${folder}`);
   };
 

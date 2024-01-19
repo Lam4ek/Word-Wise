@@ -6,10 +6,18 @@ const info = {
   name: "Danil",
   folders: {
     Eng: {
-      Verbs: ["to do", "to be", "to go", "to find"],
-      adjectives: ["hot", "cold", "beautiful"],
+      Verbs: [{ term: "todo", definition: "делать" }],
+      adjectives: [
+        { term: "Happy ", definition: "Счастлив" },
+        {
+          term: "Busy ",
+          definition: "Занят",
+        },
+      ],
     },
-    Datch: {},
+    Datch: {
+      verbs: [],
+    },
   },
 };
 

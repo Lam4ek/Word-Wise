@@ -1,47 +1,46 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import Term from "./Term";
 import styles from "./Term.module.css";
-import { useNavigate } from "react-router-dom";
-import {
-  PiCardsFill,
-  PiFilesFill,
-  PiSelectionBackgroundBold,
-} from "react-icons/pi";
-import { GiCycle } from "react-icons/gi";
+import { useNavigate, useParams } from "react-router-dom";
+import StudyPrograms from "../StudyPrograms";
+import { useAppSelector } from "../../../Hooks";
 
-function Terms() {
-  const test = [1, 2, 3, 4, 5];
+interface ITerms {
+  folderName: string;
+}
+
+const Terms: React.FC<ITerms> = ({ folderName }) => {
+  const { name } = useParams();
+
+  const data = useAppSelector((state) => state.userData.folders);
+  console.log(data);
+
   const navigate = useNavigate();
 
   const handleNavigation = (program: string) => {
-    navigate(`./program/${program}`);
+    navigate(`${program}`);
   };
+
+  useEffect(() => {
+    if (!folderName) {
+      navigate(`/`);
+    }
+  }, [name, folderName]);
+
   return (
     <div style={{ height: "90%" }}>
-      <div className={styles.programs}>
-        <div>
-          <PiCardsFill style={{ fontSize: "26px" }} />
-          <span>Cards</span>
-        </div>
-        <div>
-          <GiCycle style={{ fontSize: "26px" }} />
-          <span>Memorization</span>
-        </div>
-        <div>
-          <PiFilesFill style={{ fontSize: "26px" }} />
-          <span>Test</span>
-        </div>
-        <div>
-          <PiSelectionBackgroundBold style={{ fontSize: "26px" }} />
-          <span>Selection</span>
-        </div>
-      </div>
-
+      <StudyPrograms />
       <div className={styles.cards_wrapper}>
-        <div>{test ? test.map((el) => <Term />) : ""}</div>
+        <div>
+          {name && folderName
+            ? data[folderName][name].map((term: any, index: string) => (
+                <Term key={Math.random()} data={term} index={index} />
+              ))
+            : ""}
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default Terms;

@@ -22,7 +22,7 @@ function App() {
       <div className='app-wrapper'>
         <BrowserRouter>
           <Header />
-          <div className='main-page_wrapper'>
+          <div className='main-page-wrapper'>
             <Sidebar />
             <WorkSpace />
           </div>

@@ -12,7 +12,7 @@ const Cards: React.FC<ICards> = ({ data }) => {
   const navigate = useNavigate();
 
   const handleNavigation = (folder: string) => {
-    navigate(`/folder/${folder}`);
+    navigate(`${folder}`);
   };
 
   return (

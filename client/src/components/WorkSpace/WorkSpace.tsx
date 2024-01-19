@@ -7,15 +7,22 @@ import Modules from "./TrainingModule/Modules";
 import Terms from "./Term/Terms";
 
 const WorkSpace = () => {
+  const [folderName, setFolderName] = useState("");
+  const [moduleName, setModuleName] = useState("");
   const data = useAppSelector((state) => state.userData);
-  console.log(data);
 
   return (
     <div className={styles.workspace}>
       <Routes>
         <Route path='/' element={<Folders data={data} />} />
-        <Route path='/folder/:name' element={<Modules />} />
-        <Route path='/folder/:name/module/:name' element={<Terms />} />
+        <Route
+          path='/:name'
+          element={<Modules setFolderName={setFolderName} />}
+        />
+        <Route
+          path='/:name/:name'
+          element={<Terms folderName={folderName} />}
+        />
         {/* <Route
           path='/folder/:name/module/:name/program/:name'
           element={<Folders data={data} />}

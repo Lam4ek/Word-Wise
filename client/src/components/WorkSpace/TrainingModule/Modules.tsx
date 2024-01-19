@@ -1,17 +1,28 @@
-import React from "react";
+import { useEffect } from "react";
 import { useAppSelector } from "../../../Hooks";
 import styles from "../WorkSpace.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Module from "./Module";
 
-function Dictionaries() {
+interface IModules {
+  setFolderName: (name: string) => void;
+}
+
+const Modules: React.FC<IModules> = ({ setFolderName }) => {
   const { name } = useParams();
+
   const data = useAppSelector((state) => state.userData.folders);
 
   const navigate = useNavigate();
   const handleNavigation = (module: any) => {
-    navigate(`./module/${module}`);
+    navigate(`${module}`);
   };
+
+  useEffect(() => {
+    if (name) {
+      setFolderName(name);
+    }
+  }, [name]);
 
   return (
     <div>
@@ -31,6 +42,6 @@ function Dictionaries() {
       </div>
     </div>
   );
-}
+};
 
-export default Dictionaries;
+export default Modules;

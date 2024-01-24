@@ -1,18 +1,15 @@
 import React from "react";
 import Folder from "./Folder";
-import { TData } from "../../../types/data";
 import styles from "../WorkSpace.module.css";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../Hooks";
 
-interface ICards {
-  data: TData;
-}
-
-const Cards: React.FC<ICards> = ({ data }) => {
+const Cards: React.FC = () => {
+  const data = useAppSelector((state) => state.userData);
   const navigate = useNavigate();
 
   const handleNavigation = (folder: string) => {
-    navigate(`${folder}`);
+    navigate(`/${folder}`);
   };
 
   return (

@@ -6,17 +6,36 @@ const info = {
   name: "Danil",
   folders: {
     Eng: {
-      Verbs: [{ term: "todo", definition: "делать" }],
+      Verbs: [
+        { term: "todo", definition: "делать", id: 1 },
+        { term: "1", definition: "2", id: 2 },
+        { term: "3", definition: "4", id: 3 },
+        { term: "5", definition: "6", id: 4 },
+        { term: "7", definition: "8", id: 5 },
+        { term: "9", definition: "10", id: 6 },
+        { term: "11", definition: "12", id: 7 },
+        { term: "13", definition: "14", id: 8 },
+      ],
       adjectives: [
-        { term: "Happy ", definition: "Счастлив" },
+        { term: "Happy ", definition: "Счастлив", id: 1 },
         {
           term: "Busy ",
           definition: "Занят",
+          id: 2,
         },
       ],
     },
     Datch: {
-      verbs: [],
+      verbs: [
+        { term: "todo", definition: "делать", id: 1 },
+        { term: "1", definition: "2", id: 2 },
+        { term: "3", definition: "4", id: 3 },
+        { term: "5", definition: "6", id: 4 },
+        { term: "7", definition: "8", id: 5 },
+        { term: "9", definition: "10", id: 6 },
+        { term: "11", definition: "12", id: 7 },
+        { term: "13", definition: "14", id: 8 },
+      ],
     },
   },
 };
@@ -59,6 +78,19 @@ const dataSlice = createSlice({
     addFolder(state, action: PayloadAction<string>) {
       state.userData.folders.push([action.payload]);
     },
+    changeTerm() {},
+    changeDefinition() {},
+    removeTerm(state, action) {
+      const { folder, module, termId } = action.payload;
+      if (
+        state.userData.folders[folder] &&
+        state.userData.folders[folder][module]
+      ) {
+        state.userData.folders[folder][module] = state.userData.folders[folder][
+          module
+        ].filter((data: any) => data.id !== termId);
+      }
+    },
   },
 
   extraReducers: (builder) => {
@@ -73,5 +105,5 @@ const dataSlice = createSlice({
   },
 });
 
-export const { addFolder } = dataSlice.actions;
+export const { addFolder, removeTerm } = dataSlice.actions;
 export default dataSlice.reducer;

@@ -1,4 +1,4 @@
-import { useState, FC } from "react";
+import { useState, FC, useRef, useEffect } from "react";
 import { FaTrash } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 import styles from "./Term.module.css";
@@ -6,14 +6,17 @@ import styles from "./Term.module.css";
 type TTerm = {
   term: string;
   definition: string;
+  id: number;
 };
 
 interface ITerm {
   data: TTerm;
   index: string;
+  removeHandler: (id: number) => void;
 }
 
-const Term: FC<ITerm> = ({ data, index }) => {
+const Term: FC<ITerm> = ({ data, index, removeHandler }) => {
+  const [cardData, setCardData] = useState(data);
   const [term, setTerm] = useState(data.term);
   const [definition, setDefinition] = useState(data.definition);
   const [isChanging, setIsChanging] = useState(false);
@@ -21,20 +24,36 @@ const Term: FC<ITerm> = ({ data, index }) => {
     setIsChanging(!isChanging);
   };
 
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === "Enter") {
+      setIsChanging(false);
+    }
+  };
+
+  const rootEl = useRef(document.createElement("div"));
+
+  useEffect(() => {
+    const onClick = (e: any) => {
+      if (rootEl.current && !rootEl.current.contains(e.target) && !isChanging) {
+        setIsChanging(false);
+      }
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
   const handleTermChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLTextAreaElement;
     setTerm(target.value);
-    console.log(term);
   };
 
   const handleDefinitionChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLTextAreaElement;
     setDefinition(target.value);
-    console.log(definition);
   };
 
   return (
-    <div className={styles.card}>
+    <div ref={rootEl} className={styles.card}>
       <div className={styles.card_header}>
         <span>{index + 1}</span>
         <div className={styles.card_control}>
@@ -46,7 +65,10 @@ const Term: FC<ITerm> = ({ data, index }) => {
               color: isChanging ? "#FFDC67" : "black",
             }}
           />
-          <FaTrash style={{ cursor: "pointer" }} />
+          <FaTrash
+            onClick={() => removeHandler(cardData.id)}
+            style={{ cursor: "pointer" }}
+          />
         </div>
       </div>
       <div className={styles.term}>
@@ -54,7 +76,13 @@ const Term: FC<ITerm> = ({ data, index }) => {
           {!isChanging ? (
             <span>{term}</span>
           ) : (
-            <input onChange={handleTermChange} type='text' value={term} />
+            <input
+              tabIndex={0}
+              onKeyDown={handleKeyDown}
+              onChange={handleTermChange}
+              type='text'
+              value={term}
+            />
           )}
           <span className={styles.term_line}></span>
           <span style={{ fontSize: "12px" }}>term</span>
@@ -64,6 +92,8 @@ const Term: FC<ITerm> = ({ data, index }) => {
             <span>{definition}</span>
           ) : (
             <input
+              tabIndex={0}
+              onKeyDown={handleKeyDown}
               onChange={handleDefinitionChange}
               type='text'
               value={definition}

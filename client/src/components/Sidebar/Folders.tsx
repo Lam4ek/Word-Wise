@@ -8,8 +8,8 @@ function Folders() {
 
   const navigate = useNavigate();
 
-  const foldersNavigation = (folder: any) => {
-    navigate(`${folder}`);
+  const foldersNavigation = (folder: string) => {
+    navigate(`/${folder}`);
   };
 
   return (

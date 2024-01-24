@@ -4,12 +4,8 @@ import styles from "../WorkSpace.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Module from "./Module";
 
-interface IModules {
-  setFolderName: (name: string) => void;
-}
-
-const Modules: React.FC<IModules> = ({ setFolderName }) => {
-  const { name } = useParams();
+const Modules: React.FC = () => {
+  const { folderName } = useParams();
 
   const data = useAppSelector((state) => state.userData.folders);
 
@@ -18,18 +14,12 @@ const Modules: React.FC<IModules> = ({ setFolderName }) => {
     navigate(`${module}`);
   };
 
-  useEffect(() => {
-    if (name) {
-      setFolderName(name);
-    }
-  }, [name]);
-
   return (
     <div>
       <h2 style={{ marginBottom: "10px" }}>Modules</h2>
       <div className={styles.cards}>
-        {data && name ? (
-          Object.keys(data[name]).map((dictionary: any) => (
+        {data && folderName ? (
+          Object.keys(data[folderName]).map((dictionary: any) => (
             <Module
               key={Math.random()}
               dictionary={dictionary}

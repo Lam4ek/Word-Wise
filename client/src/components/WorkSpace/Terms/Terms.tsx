@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
-import Term from "./Term";
+import Term from ".";
 import styles from "./Term.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import StudyPrograms from "../StudyPrograms";
 import { useAppSelector } from "../../../Hooks";
-import { removeTerm } from "../../../store/dataSlice";
+import { removeTerm, changeTerm } from "../../../store/dataSlice";
 import { useDispatch } from "react-redux";
-
-type TTerm = {
-  term: string;
-  definition: string;
-  id: number;
-};
+import { TTerm } from "../../../types/types";
 
 const Terms: React.FC = () => {
   const { moduleName, folderName } = useParams();
@@ -30,6 +25,18 @@ const Terms: React.FC = () => {
   const removeHandler = (id: number) => {
     dispatch(
       removeTerm({ folder: folderName, module: moduleName, termId: id })
+    );
+  };
+
+  const changeHandler = (term: string, definition: string, id: number) => {
+    dispatch(
+      changeTerm({
+        folder: folderName,
+        module: moduleName,
+        termId: id,
+        newTerm: term,
+        newDefinition: definition,
+      })
     );
   };
 
@@ -53,6 +60,7 @@ const Terms: React.FC = () => {
                 data={term}
                 index={index}
                 removeHandler={removeHandler}
+                changeHandler={changeHandler}
               />
             ))
           ) : (

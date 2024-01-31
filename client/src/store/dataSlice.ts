@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { DataState, TTerm } from "../types/types";
 
 const info = {
   user_Id: "583c3ac3f38e84297c002546",
@@ -17,9 +18,9 @@ const info = {
         { term: "13", definition: "14", id: 8 },
       ],
       adjectives: [
-        { term: "Happy ", definition: "Счастлив", id: 1 },
+        { term: "Happy", definition: "Счастлив", id: 1 },
         {
-          term: "Busy ",
+          term: "Busy",
           definition: "Занят",
           id: 2,
         },
@@ -38,19 +39,6 @@ const info = {
       ],
     },
   },
-};
-
-type UserData = {
-  user_Id: string;
-  email: string;
-  name: string;
-  folders: Object;
-};
-
-type DataState = {
-  userData: UserData[] | any;
-  status: string;
-  error: string | null;
 };
 
 export const fetchData = createAsyncThunk(
@@ -75,21 +63,27 @@ const dataSlice = createSlice({
   name: "userData",
   initialState,
   reducers: {
-    addFolder(state, action: PayloadAction<string>) {
-      state.userData.folders.push([action.payload]);
+    addFolder(state, action) {
+      const { newFolder } = action.payload;
+      state.userData.folders = { ...state.userData.folders, newFolder: {} };
     },
-    changeTerm() {},
-    changeDefinition() {},
+    addTerm(state, action) {},
+    changeTerm(state, action) {
+      const { folder, module, newTerm, newDefinition, termId } = action.payload;
+      const correctData = state.userData.folders[folder][module].find(
+        (data: TTerm) => data.id == termId
+      );
+      if (correctData) {
+        correctData.term = newTerm;
+        correctData.definition = newDefinition;
+      }
+    },
     removeTerm(state, action) {
       const { folder, module, termId } = action.payload;
-      if (
-        state.userData.folders[folder] &&
-        state.userData.folders[folder][module]
-      ) {
-        state.userData.folders[folder][module] = state.userData.folders[folder][
-          module
-        ].filter((data: any) => data.id !== termId);
-      }
+
+      state.userData.folders[folder][module] = state.userData.folders[folder][
+        module
+      ].filter((data: TTerm) => data.id !== termId);
     },
   },
 
@@ -105,5 +99,5 @@ const dataSlice = createSlice({
   },
 });
 
-export const { addFolder, removeTerm } = dataSlice.actions;
+export const { addFolder, removeTerm, changeTerm } = dataSlice.actions;
 export default dataSlice.reducer;

@@ -4,7 +4,7 @@ import { useAppSelector } from "../../../Hooks";
 import styles from "../WorkSpace.module.css";
 
 interface IDictionaries {
-  dictionary: any;
+  dictionary: string;
   handleNavigation: (module: string) => void;
 }
 

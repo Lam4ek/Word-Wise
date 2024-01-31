@@ -17,7 +17,7 @@ function Folders() {
       <h2>folders</h2>
       <ul className={styles.list}>
         {data.folders
-          ? Object.keys(data.folders).map((folder: any) => (
+          ? Object.keys(data.folders).map((folder: string) => (
               <li onClick={() => foldersNavigation(folder)} key={Math.random()}>
                 <span>{folder}</span>
               </li>

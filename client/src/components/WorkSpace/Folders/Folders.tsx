@@ -1,5 +1,5 @@
 import React from "react";
-import Folder from "./Folder";
+import Folder from ".";
 import styles from "../WorkSpace.module.css";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../Hooks";
@@ -17,7 +17,7 @@ const Cards: React.FC = () => {
       <h2 style={{ marginBottom: "10px" }}>Folders</h2>
       <div className={styles.cards}>
         {data.folders ? (
-          Object.keys(data.folders).map((folder: any) => (
+          Object.keys(data.folders).map((folder: string) => (
             <Folder
               key={Math.random()}
               folder={folder}

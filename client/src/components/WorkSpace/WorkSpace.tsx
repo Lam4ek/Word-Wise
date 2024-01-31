@@ -1,8 +1,8 @@
 import styles from "./WorkSpace.module.css";
-import Folders from "./Folder/Folders";
+import Folders from "./Folders/Folders";
 import { Route, Routes } from "react-router-dom";
-import Modules from "./TrainingModule/Modules";
-import Terms from "./Term/Terms";
+import Modules from "./StudyModules/Modules";
+import Terms from "./Terms/Terms";
 
 const WorkSpace = () => {
   return (

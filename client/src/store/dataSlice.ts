@@ -19,11 +19,7 @@ const info = {
       ],
       adjectives: [
         { term: "Happy", definition: "Счастлив", id: 1 },
-        {
-          term: "Busy",
-          definition: "Занят",
-          id: 2,
-        },
+        { term: "Busy", definition: "Занят", id: 2 },
       ],
     },
     Datch: {
@@ -64,26 +60,83 @@ const dataSlice = createSlice({
   initialState,
   reducers: {
     addFolder(state, action) {
-      const { newFolder } = action.payload;
-      state.userData.folders = { ...state.userData.folders, newFolder: {} };
+      // Базовое имя для новой папки
+      const baseName = "New folder";
+      let newName = baseName;
+
+      // Получаем ключи существующих папок
+      const folderNames = Object.keys(state.userData.folders);
+
+      // Если базовое имя уже существует, ищем следующее доступное имя
+      if (folderNames.includes(newName)) {
+        let counter = 1; // Начинаем счетчик с 1
+        // Пока имя с счетчиком существует, увеличиваем счетчик
+        while (folderNames.includes(`${baseName}(${counter})`)) {
+          counter++;
+        }
+        // Когда нашли несуществующее имя, обновляем newName
+        newName = `${baseName}(${counter})`;
+      }
+
+      // Добавляем новую папку с уникальным именем
+      state.userData.folders[newName] = {};
     },
-    addTerm(state, action) {},
+
+    removeFolder(state, action) {
+      const { folder } = action.payload;
+      // We remove the folder directly, thanks to Immer this will not lead to mutation
+      delete state.userData.folders[folder];
+    },
+
+    addModule(state, action) {},
+
+    removeModule(state, action) {
+      const { folder, module } = action.payload;
+      // We remove the module directly, thanks to Immer this will not lead to mutation
+      delete state.userData.folders[folder][module];
+    },
+
+    addTerm(state, action) {
+      const { folder, module } = action.payload;
+      state.userData.folders[folder][module].unshift({
+        term: "",
+        definition: "",
+        id: Math.random(),
+      });
+    },
     changeTerm(state, action) {
       const { folder, module, newTerm, newDefinition, termId } = action.payload;
       const correctData = state.userData.folders[folder][module].find(
-        (data: TTerm) => data.id == termId
+        (data: TTerm) => data.id === termId
       );
       if (correctData) {
         correctData.term = newTerm;
         correctData.definition = newDefinition;
       }
     },
+
     removeTerm(state, action) {
       const { folder, module, termId } = action.payload;
-
-      state.userData.folders[folder][module] = state.userData.folders[folder][
-        module
-      ].filter((data: TTerm) => data.id !== termId);
+      // We create a new object for folders to avoid mutations.
+      const updatedFolders = {
+        ...state.userData.folders,
+        [folder]: {
+          ...state.userData.folders[folder],
+          [module]: state.userData.folders[folder][module].filter(
+            (term: TTerm) => term.id !== termId
+          ),
+        },
+      };
+      // Create a new object for userData, including the updated folders
+      const updatedUserData = {
+        ...state.userData,
+        folders: updatedFolders,
+      };
+      // Returning a new state with updated userData
+      return {
+        ...state,
+        userData: updatedUserData,
+      };
     },
   },
 
@@ -99,5 +152,12 @@ const dataSlice = createSlice({
   },
 });
 
-export const { addFolder, removeTerm, changeTerm } = dataSlice.actions;
+export const {
+  addFolder,
+  removeTerm,
+  changeTerm,
+  addTerm,
+  removeFolder,
+  removeModule,
+} = dataSlice.actions;
 export default dataSlice.reducer;

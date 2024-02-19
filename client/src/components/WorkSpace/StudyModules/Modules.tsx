@@ -19,10 +19,11 @@ const Modules: React.FC = () => {
       <h2 style={{ marginBottom: "10px" }}>Modules</h2>
       <div className={styles.cards}>
         {data && folderName ? (
-          Object.keys(data[folderName]).map((dictionary: string) => (
+          Object.keys(data[folderName]).map((module: string) => (
             <Module
               key={Math.random()}
-              dictionary={dictionary}
+              module={module}
+              folder={folderName}
               handleNavigation={handleNavigation}
             />
           ))

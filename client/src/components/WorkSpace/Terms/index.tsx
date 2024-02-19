@@ -1,6 +1,5 @@
 import { useState, FC, useRef, useEffect } from "react";
-import { FaTrash } from "react-icons/fa";
-import { FaPen } from "react-icons/fa";
+import { FaTrash, FaPen } from "react-icons/fa";
 import styles from "./Term.module.css";
 import { TTerm } from "../../../types/types";
 

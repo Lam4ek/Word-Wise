@@ -4,7 +4,7 @@ import styles from "./Term.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import StudyPrograms from "../StudyPrograms";
 import { useAppSelector } from "../../../Hooks";
-import { removeTerm, changeTerm } from "../../../store/dataSlice";
+import { removeTerm, changeTerm, addTerm } from "../../../store/dataSlice";
 import { useDispatch } from "react-redux";
 import { TTerm } from "../../../types/types";
 
@@ -40,6 +40,10 @@ const Terms: React.FC = () => {
     );
   };
 
+  const addNewTerm = () => {
+    dispatch(addTerm({ folder: folderName, module: moduleName }));
+  };
+
   useEffect(() => {
     if (data && moduleName && folderName) {
       setIsLoading(false);
@@ -53,6 +57,9 @@ const Terms: React.FC = () => {
       <StudyPrograms />
       <div className={styles.cards_wrapper}>
         <div>
+          <div onClick={addNewTerm} className={styles.new_card}>
+            <h3>+Add card</h3>
+          </div>
           {!isLoading && moduleName && folderName ? (
             data[folderName][moduleName].map((term: TTerm, index: string) => (
               <Term

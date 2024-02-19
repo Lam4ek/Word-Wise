@@ -1,0 +1,20 @@
+.contextMenu {
+  position: fixed;
+  border-radius: 5px;
+  padding: 5px;
+  z-index: 999;
+  background-color: rgb(42, 42, 42);
+  border: 1px solid rgb(54, 54, 54);
+}
+
+.contextMenuItem {
+  color: #fff;
+  font-size: 14px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.contextMenuItem:hover {
+  background-color: rgb(56, 56, 56);
+}

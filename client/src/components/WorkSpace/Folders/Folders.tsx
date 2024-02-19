@@ -1,12 +1,15 @@
-import React from "react";
+import { useState, FC } from "react";
 import Folder from ".";
 import styles from "../WorkSpace.module.css";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../Hooks";
+import { addFolder } from "../../../store/dataSlice";
+import { useDispatch } from "react-redux";
 
-const Cards: React.FC = () => {
+const Cards: FC = () => {
   const data = useAppSelector((state) => state.userData);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleNavigation = (folder: string) => {
     navigate(`/${folder}`);
@@ -27,6 +30,9 @@ const Cards: React.FC = () => {
         ) : (
           <></>
         )}
+        <div onClick={() => dispatch(addFolder({}))} className={styles.newCard}>
+          <h3>+</h3>
+        </div>
       </div>
     </>
   );

@@ -5,10 +5,6 @@
   box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.25);
 }
 
-.card:first-child {
-  margin-top: 0;
-}
-
 .card_header {
   box-shadow: 0px 2px 4px -3px rgba(0, 0, 0, 0.55);
   display: flex;
@@ -16,6 +12,21 @@
   justify-content: space-between;
   color: black;
   padding: 15px 20px;
+}
+
+.new_card {
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 30px;
+  box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.25);
+  height: 50px;
+  cursor: pointer;
+  font-weight: 800;
+  letter-spacing: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
 }
 
 .term {

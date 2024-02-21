@@ -1,29 +1,41 @@
-import { useCallback, FC, MouseEvent, useMemo } from "react";
+import {
+  useCallback,
+  FC,
+  MouseEvent,
+  useMemo,
+  useState,
+  KeyboardEventHandler,
+} from "react";
 import styles from "../WorkSpace.module.css";
 import { useContextMenu } from "../../../Hooks/useContextMenu";
-import { removeFolder } from "../../../store/dataSlice";
+import { removeFolder, renameFolder } from "../../../store/dataSlice";
 import { useDispatch } from "react-redux";
+import { FolderData } from "../../../types/types";
 
 interface IFolder {
-  folder: string;
-  handleNavigation: (folder: string) => void;
+  folder: FolderData;
+  handleNavigation: (folderName: string) => void;
 }
 
 const Folder: FC<IFolder> = ({ folder, handleNavigation }) => {
   const { setContextMenu } = useContextMenu();
   const dispatch = useDispatch();
+  const [newFolderName, setNewFolderName] = useState(folder.name);
+  const [isEditing, setIsEditing] = useState(false);
 
   const contextMenu = useMemo(
     () => [
       {
         name: "Remove folder",
         onClick: () => {
-          dispatch(removeFolder({ folder: folder }));
+          dispatch(removeFolder({ folderId: folder.id }));
         },
       },
       {
         name: "Rename folder",
-        onClick: () => {},
+        onClick: () => {
+          setIsEditing(true);
+        },
       },
       {
         name: "Change color",
@@ -42,14 +54,47 @@ const Folder: FC<IFolder> = ({ folder, handleNavigation }) => {
     },
     [setContextMenu, contextMenu]
   );
+
+  const handleRename = (folder: FolderData) => {
+    if (newFolderName.trim() !== "") {
+      dispatch(
+        renameFolder({
+          folderId: folder.id,
+          newFolderName: newFolderName.trim(),
+        })
+      );
+      setIsEditing(false); // Finish editing after submitting new name
+    }
+  };
+
+  const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (event) => {
+    if (event.key === "Enter") {
+      handleRename(folder);
+    }
+  };
+
   return (
-    <div
-      onContextMenu={handleContextMenu}
-      onClick={() => handleNavigation(folder)}
-      className={styles.card}
-    >
-      <h3>{folder.split("")[0].toUpperCase()}</h3>
-      <span>{folder}</span>
+    <div className={styles.cardWrapper}>
+      <div
+        onContextMenu={handleContextMenu}
+        onClick={() => handleNavigation(folder.name)}
+        className={styles.card}
+      >
+        <h3>{folder.name.split("")[0].toUpperCase()}</h3>
+      </div>
+      {isEditing ? (
+        <input
+          className={styles.renameInput}
+          type='text'
+          value={newFolderName}
+          onChange={(e) => setNewFolderName(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onBlur={() => handleRename(folder)} // Submit changes when focus is lost
+          autoFocus
+        />
+      ) : (
+        <span>{folder.name}</span>
+      )}
     </div>
   );
 };

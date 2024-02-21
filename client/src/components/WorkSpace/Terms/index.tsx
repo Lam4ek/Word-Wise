@@ -1,53 +1,36 @@
-import { useState, FC, useRef, useEffect } from "react";
+import { useState, FC, useRef, useEffect, KeyboardEventHandler } from "react";
 import { FaTrash, FaPen } from "react-icons/fa";
 import styles from "./Term.module.css";
-import { TTerm } from "../../../types/types";
+import { TermData } from "../../../types/types";
 
 interface ITerm {
-  data: TTerm;
+  data: TermData;
   index: string;
   removeHandler: (id: number) => void;
   changeHandler: (newTerm: string, newDefinition: string, id: number) => void;
 }
 
 const Term: FC<ITerm> = ({ data, index, removeHandler, changeHandler }) => {
-  const [term, setTerm] = useState(data.term);
-  const [definition, setDefinition] = useState(data.definition);
-  const [isChanging, setIsChanging] = useState(false);
+  const [newTerm, setNewTerm] = useState(data.term);
+  const [newDefinition, setNewDefinition] = useState(data.definition);
+  const [isEditing, setIsEditing] = useState(false);
   const rootEl = useRef(document.createElement("div"));
 
-  const changeButtonHandler = (id: number) => {
-    setIsChanging(!isChanging);
-    if (isChanging) {
-      changeHandler(term, definition, id);
+  const changeButtonHandler = (term: TermData) => {
+    if (isEditing) {
+      // Завершаем редактирование и вызываем changeHandler с актуальными значениями
+      changeHandler(newTerm, newDefinition, term.id);
     }
+    setIsEditing(!isEditing); // Переключаем состояние редактирования
   };
 
-  const handleTermChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLTextAreaElement;
-    setTerm(target.value);
-  };
-
-  const handleDefinitionChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLTextAreaElement;
-    setDefinition(target.value);
-  };
-
-  // const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-  //   if (e.key === "Enter") {
-  //     setIsChanging(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const onClick = (e: any) => {
-  //     if (rootEl.current && !rootEl.current.contains(e.target) && !isChanging) {
-  //       setIsChanging(false);
-  //     }
-  //   };
-  //   document.addEventListener("click", onClick);
-  //   return () => document.removeEventListener("click", onClick);
-  // }, []);
+  const handleKeyDown =
+    (term: TermData) => (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") {
+        changeHandler(newTerm, newDefinition, term.id);
+        setIsEditing(false); // Завершаем редактирование при нажатии Enter
+      }
+    };
 
   return (
     <div ref={rootEl} className={styles.card}>
@@ -55,11 +38,11 @@ const Term: FC<ITerm> = ({ data, index, removeHandler, changeHandler }) => {
         <span>{index + 1}</span>
         <div className={styles.card_control}>
           <FaPen
-            onClick={() => changeButtonHandler(data.id)}
+            onClick={() => changeButtonHandler(data)}
             style={{
               cursor: "pointer",
               marginRight: "10px",
-              color: isChanging ? "#FFDC67" : "black",
+              color: isEditing ? "#FFDC67" : "black",
             }}
           />
           <FaTrash
@@ -70,28 +53,30 @@ const Term: FC<ITerm> = ({ data, index, removeHandler, changeHandler }) => {
       </div>
       <div className={styles.term}>
         <div>
-          {!isChanging ? (
-            <span>{term}</span>
+          {!isEditing ? (
+            <span>{data.term}</span>
           ) : (
             <input
               tabIndex={0}
-              onChange={handleTermChange}
+              onChange={(e) => setNewTerm(e.target.value)}
+              onKeyDown={handleKeyDown(data)}
               type='text'
-              value={term}
+              value={newTerm}
             />
           )}
           <span className={styles.term_line}></span>
           <span style={{ fontSize: "12px" }}>term</span>
         </div>
         <div>
-          {!isChanging ? (
-            <span>{definition}</span>
+          {!isEditing ? (
+            <span>{data.definition}</span>
           ) : (
             <input
               tabIndex={0}
-              onChange={handleDefinitionChange}
+              onChange={(e) => setNewDefinition(e.target.value)}
+              onKeyDown={handleKeyDown(data)}
               type='text'
-              value={definition}
+              value={newDefinition}
             />
           )}
           <span className={styles.term_line}></span>

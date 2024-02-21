@@ -1,21 +1,26 @@
-import React, { useCallback, useMemo, MouseEvent } from "react";
+import React, {
+  useCallback,
+  useMemo,
+  MouseEvent,
+  useState,
+  KeyboardEventHandler,
+} from "react";
 import { useParams } from "react-router-dom";
 import { useAppSelector, useContextMenu } from "../../../Hooks";
 import styles from "../WorkSpace.module.css";
 import { useDispatch } from "react-redux";
-import { removeModule } from "../../../store/dataSlice";
+import { removeModule, renameModule } from "../../../store/dataSlice";
+import { ModuleData } from "../../../types/types";
 
-interface IDictionaries {
-  module: string;
-  folder: string;
+interface Module {
+  module: ModuleData;
+  folderId: string;
   handleNavigation: (module: string) => void;
 }
 
-const Dictionary: React.FC<IDictionaries> = ({
-  module,
-  folder,
-  handleNavigation,
-}) => {
+const Module: React.FC<Module> = ({ module, folderId, handleNavigation }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [newModuleName, setNewModuleName] = useState(module.name);
   const { setContextMenu } = useContextMenu();
   const dispatch = useDispatch();
 
@@ -24,12 +29,14 @@ const Dictionary: React.FC<IDictionaries> = ({
       {
         name: "Remove module",
         onClick: () => {
-          dispatch(removeModule({ folder: folder, module: module }));
+          dispatch(removeModule({ folderId: folderId, moduleId: module.id }));
         },
       },
       {
         name: "Rename module",
-        onClick: () => {},
+        onClick: () => {
+          setIsEditing(true);
+        },
       },
       {
         name: "Change color",
@@ -48,16 +55,49 @@ const Dictionary: React.FC<IDictionaries> = ({
     },
     [setContextMenu, contextMenu]
   );
+
+  const handleRename = (module: ModuleData) => {
+    if (newModuleName.trim() !== "") {
+      dispatch(
+        renameModule({
+          folderId: folderId,
+          moduleId: module.id,
+          newModuleName: newModuleName.trim(),
+        })
+      );
+      setIsEditing(false); // Finish editing after submitting new name
+    }
+  };
+
+  const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (event) => {
+    if (event.key === "Enter") {
+      handleRename(module);
+    }
+  };
   return (
-    <div
-      onClick={() => handleNavigation(module)}
-      className={styles.card}
-      onContextMenu={handleContextMenu}
-    >
-      <h3>{module.split("")[0].toUpperCase()}</h3>
-      <span>{module}</span>
+    <div className={styles.cardWrapper}>
+      <div
+        onClick={() => handleNavigation(module.name)}
+        className={styles.card}
+        onContextMenu={handleContextMenu}
+      >
+        <h3>{module.name.split("")[0].toUpperCase()}</h3>
+      </div>
+      {isEditing ? (
+        <input
+          className={styles.renameInput}
+          type='text'
+          value={newModuleName}
+          onChange={(e) => setNewModuleName(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onBlur={() => handleRename(module)}
+          autoFocus
+        />
+      ) : (
+        <span>{module.name}</span>
+      )}
     </div>
   );
 };
 
-export default Dictionary;
+export default Module;

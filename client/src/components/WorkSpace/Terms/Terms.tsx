@@ -1,56 +1,68 @@
 import { useEffect, useState } from "react";
 import Term from ".";
 import styles from "./Term.module.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import StudyPrograms from "../StudyPrograms";
 import { useAppSelector } from "../../../Hooks";
 import { removeTerm, changeTerm, addTerm } from "../../../store/dataSlice";
 import { useDispatch } from "react-redux";
-import { TTerm } from "../../../types/types";
+import { FolderData, ModuleData, TermData } from "../../../types/types";
+import NotFoundPage from "../NotFoundPage";
 
 const Terms: React.FC = () => {
-  const { moduleName, folderName } = useParams();
+  const { moduleName, folderName } = useParams<{
+    folderName: string;
+    moduleName: string;
+  }>();
+
   const [isLoading, setIsLoading] = useState(true);
 
-  const data = useAppSelector((state) => state.userData.folders);
+  const folder = useAppSelector((state) =>
+    state.userData.folders
+      ? state.userData.folders.find(
+          (folder: FolderData) => folder.name === folderName
+        )
+      : undefined
+  );
 
-  // const navigate = useNavigate();
-
-  // const handleNavigation = (program: string) => {
-  //   navigate(`${program}`);
-  // };
+  const data = folder?.modules?.find(
+    (module: ModuleData) => module.name === moduleName
+  );
 
   const dispatch = useDispatch();
 
   const removeHandler = (id: number) => {
     dispatch(
-      removeTerm({ folder: folderName, module: moduleName, termId: id })
+      removeTerm({ folderId: folder.id, moduleId: data.id, termId: id })
     );
   };
 
   const changeHandler = (term: string, definition: string, id: number) => {
     dispatch(
       changeTerm({
-        folder: folderName,
-        module: moduleName,
+        folderId: folder.id,
+        moduleId: data.id,
         termId: id,
         newTerm: term,
         newDefinition: definition,
       })
     );
   };
-
   const addNewTerm = () => {
-    dispatch(addTerm({ folder: folderName, module: moduleName }));
+    dispatch(addTerm({ folderId: folder.id, moduleId: data.id }));
   };
 
   useEffect(() => {
-    if (data && moduleName && folderName) {
+    if (data) {
       setIsLoading(false);
     } else {
       setIsLoading(true);
     }
-  }, [data, moduleName, folderName]);
+  }, [data]);
+
+  if (!data) {
+    return <NotFoundPage />;
+  }
 
   return (
     <div style={{ height: "90%" }}>
@@ -61,7 +73,7 @@ const Terms: React.FC = () => {
             <h3>+Add card</h3>
           </div>
           {!isLoading && moduleName && folderName ? (
-            data[folderName][moduleName].map((term: TTerm, index: string) => (
+            data.terms.map((term: TermData, index: string) => (
               <Term
                 key={Math.random()}
                 data={term}

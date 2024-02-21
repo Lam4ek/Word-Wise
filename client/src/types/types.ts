@@ -1,18 +1,34 @@
-export type UserData = {
-  user_Id: string;
-  email: string;
-  name: string;
-  folders: Object;
-};
-
 export type DataState = {
-  userData: UserData[] | any;
+  userData: Info | any;
   status: string;
   error: string | null;
 };
 
-export type TTerm = {
+interface User {
+  id: string;
+  email: string;
+  name: string;
+}
+
+export interface TermData {
+  id: number;
   term: string;
   definition: string;
-  id: number;
-};
+}
+
+export interface ModuleData {
+  id: string;
+  name: string;
+  terms: TermData[];
+}
+
+export interface FolderData {
+  id: string;
+  name: string;
+  modules: ModuleData[];
+}
+
+export interface Info {
+  user: User;
+  folders: FolderData[];
+}

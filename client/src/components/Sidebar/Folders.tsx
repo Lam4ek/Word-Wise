@@ -2,9 +2,10 @@ import React from "react";
 import styles from "./Sidebar.module.css";
 import { useAppSelector } from "../../Hooks";
 import { useNavigate } from "react-router-dom";
+import { FolderData } from "../../types/types";
 
 function Folders() {
-  const data = useAppSelector((state) => state.userData);
+  const data = useAppSelector((state) => state.userData.folders);
 
   const navigate = useNavigate();
 
@@ -16,10 +17,13 @@ function Folders() {
     <div>
       <h2>folders</h2>
       <ul className={styles.list}>
-        {data.folders
-          ? Object.keys(data.folders).map((folder: string) => (
-              <li onClick={() => foldersNavigation(folder)} key={Math.random()}>
-                <span>{folder}</span>
+        {data
+          ? data.slice(0, 6).map((folder: FolderData) => (
+              <li
+                onClick={() => foldersNavigation(folder.name)}
+                key={Math.random()}
+              >
+                <span>{folder.name}</span>
               </li>
             ))
           : ""}

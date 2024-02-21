@@ -24,14 +24,19 @@
 .list li {
   color: #58afff;
   margin-bottom: 5px;
+  max-width: 175px;
+  overflow: visible;
 }
 
-.list span {
+.list li span {
   color: #d0d0d0;
   font-size: 13px;
   margin-left: -5px;
   cursor: pointer;
   transition: 0.3s ease-in-out;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .list span:hover {

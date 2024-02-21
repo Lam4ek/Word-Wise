@@ -89,7 +89,7 @@ const dataSlice = createSlice({
 
       // Add a new folder with a unique name
       const newFolder = {
-        id: `folder-${Date.now()}`,
+        id: `${Date.now()}`,
         name: newName,
         modules: [],
       };
@@ -110,7 +110,8 @@ const dataSlice = createSlice({
 
       // Проверяем, уникально ли новое имя среди существующих папок
       const isNameUnique = !state.userData.folders.some(
-        (folder: FolderData) => folder.name === newFolderName
+        (folder: FolderData) =>
+          folder.name === newFolderName && folder.id !== folderId
       );
       if (!isNameUnique) {
         alert(`Folder "${newFolderName}" already exists.`);
@@ -154,7 +155,7 @@ const dataSlice = createSlice({
 
       // Create a new module and add it to the found folder
       const newModule: ModuleData = {
-        id: `module-${Date.now()}`,
+        id: `${Date.now()}`,
         name: newName,
         terms: [],
       };
@@ -204,7 +205,8 @@ const dataSlice = createSlice({
 
       // Checking if the new name is unique among existing modules
       const isNameUnique = !state.userData.folders[folderIndex].modules.some(
-        (module: ModuleData) => module.name === newModuleName
+        (module: ModuleData) =>
+          module.name === newModuleName && module.id !== moduleId
       );
       if (!isNameUnique) {
         alert(`Module name "${newModuleName}" already exists in the folder.`);

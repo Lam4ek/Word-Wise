@@ -5,8 +5,7 @@ import React, {
   useState,
   KeyboardEventHandler,
 } from "react";
-import { useParams } from "react-router-dom";
-import { useAppSelector, useContextMenu } from "../../../Hooks";
+import { useContextMenu } from "../../../Hooks";
 import styles from "../WorkSpace.module.css";
 import { useDispatch } from "react-redux";
 import { removeModule, renameModule } from "../../../store/dataSlice";
@@ -15,7 +14,7 @@ import { ModuleData } from "../../../types/types";
 interface Module {
   module: ModuleData;
   folderId: string;
-  handleNavigation: (module: string) => void;
+  handleNavigation: (moduleId: string) => void;
 }
 
 const Module: React.FC<Module> = ({ module, folderId, handleNavigation }) => {
@@ -67,6 +66,8 @@ const Module: React.FC<Module> = ({ module, folderId, handleNavigation }) => {
       );
       setIsEditing(false); // Finish editing after submitting new name
     }
+    setIsEditing(false);
+    setNewModuleName(module.name);
   };
 
   const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (event) => {
@@ -77,7 +78,7 @@ const Module: React.FC<Module> = ({ module, folderId, handleNavigation }) => {
   return (
     <div className={styles.cardWrapper}>
       <div
-        onClick={() => handleNavigation(module.name)}
+        onClick={() => handleNavigation(module.id)}
         className={styles.card}
         onContextMenu={handleContextMenu}
       >

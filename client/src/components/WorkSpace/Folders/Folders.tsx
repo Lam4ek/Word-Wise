@@ -22,8 +22,8 @@ const Cards: FC = () => {
     }
   }, [data]);
 
-  const handleNavigation = (folder: string) => {
-    navigate(`/${folder}`);
+  const handleNavigation = (folderId: string) => {
+    navigate(`./${folderId}/modules`);
   };
 
   if (!data) {

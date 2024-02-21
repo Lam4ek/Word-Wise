@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Sidebar.module.css";
 import Folders from "./Folders";
 import RandomTest from "./RandomTest";

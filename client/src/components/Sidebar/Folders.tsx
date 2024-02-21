@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Sidebar.module.css";
 import { useAppSelector } from "../../Hooks";
 import { useNavigate } from "react-router-dom";
@@ -9,8 +8,8 @@ function Folders() {
 
   const navigate = useNavigate();
 
-  const foldersNavigation = (folder: string) => {
-    navigate(`/${folder}`);
+  const foldersNavigation = (folderId: string) => {
+    navigate(`folders/${folderId}`);
   };
 
   return (
@@ -20,7 +19,7 @@ function Folders() {
         {data
           ? data.slice(0, 6).map((folder: FolderData) => (
               <li
-                onClick={() => foldersNavigation(folder.name)}
+                onClick={() => foldersNavigation(folder.id)}
                 key={Math.random()}
               >
                 <span>{folder.name}</span>
@@ -29,7 +28,7 @@ function Folders() {
           : ""}
       </ul>
 
-      <span onClick={() => navigate("/")} className={styles.view_btn}>
+      <span onClick={() => navigate("/folders")} className={styles.view_btn}>
         View all
       </span>
     </div>

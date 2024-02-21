@@ -1,34 +1,34 @@
-import { useState, FC, useRef, useEffect, KeyboardEventHandler } from "react";
+import { useState, FC, useRef } from "react";
 import { FaTrash, FaPen } from "react-icons/fa";
 import styles from "./Term.module.css";
 import { TermData } from "../../../types/types";
 
 interface ITerm {
-  data: TermData;
+  term: TermData;
   index: string;
   removeHandler: (id: number) => void;
   changeHandler: (newTerm: string, newDefinition: string, id: number) => void;
 }
 
-const Term: FC<ITerm> = ({ data, index, removeHandler, changeHandler }) => {
-  const [newTerm, setNewTerm] = useState(data.term);
-  const [newDefinition, setNewDefinition] = useState(data.definition);
+const Term: FC<ITerm> = ({ term, index, removeHandler, changeHandler }) => {
+  const [newTerm, setNewTerm] = useState(term.term);
+  const [newDefinition, setNewDefinition] = useState(term.definition);
   const [isEditing, setIsEditing] = useState(false);
   const rootEl = useRef(document.createElement("div"));
 
   const changeButtonHandler = (term: TermData) => {
     if (isEditing) {
-      // Завершаем редактирование и вызываем changeHandler с актуальными значениями
+      // We complete editing and call ChangeHandler with the current values
       changeHandler(newTerm, newDefinition, term.id);
     }
-    setIsEditing(!isEditing); // Переключаем состояние редактирования
+    setIsEditing(!isEditing); // Switching the editing state
   };
 
   const handleKeyDown =
     (term: TermData) => (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter") {
         changeHandler(newTerm, newDefinition, term.id);
-        setIsEditing(false); // Завершаем редактирование при нажатии Enter
+        setIsEditing(false); // Finish editing by pressing Enter
       }
     };
 
@@ -38,7 +38,7 @@ const Term: FC<ITerm> = ({ data, index, removeHandler, changeHandler }) => {
         <span>{index + 1}</span>
         <div className={styles.card_control}>
           <FaPen
-            onClick={() => changeButtonHandler(data)}
+            onClick={() => changeButtonHandler(term)}
             style={{
               cursor: "pointer",
               marginRight: "10px",
@@ -46,7 +46,7 @@ const Term: FC<ITerm> = ({ data, index, removeHandler, changeHandler }) => {
             }}
           />
           <FaTrash
-            onClick={() => removeHandler(data.id)}
+            onClick={() => removeHandler(term.id)}
             style={{ cursor: "pointer" }}
           />
         </div>
@@ -54,12 +54,12 @@ const Term: FC<ITerm> = ({ data, index, removeHandler, changeHandler }) => {
       <div className={styles.term}>
         <div>
           {!isEditing ? (
-            <span>{data.term}</span>
+            <span>{term.term}</span>
           ) : (
             <input
               tabIndex={0}
               onChange={(e) => setNewTerm(e.target.value)}
-              onKeyDown={handleKeyDown(data)}
+              onKeyDown={handleKeyDown(term)}
               type='text'
               value={newTerm}
             />
@@ -69,12 +69,12 @@ const Term: FC<ITerm> = ({ data, index, removeHandler, changeHandler }) => {
         </div>
         <div>
           {!isEditing ? (
-            <span>{data.definition}</span>
+            <span>{term.definition}</span>
           ) : (
             <input
               tabIndex={0}
               onChange={(e) => setNewDefinition(e.target.value)}
-              onKeyDown={handleKeyDown(data)}
+              onKeyDown={handleKeyDown(term)}
               type='text'
               value={newDefinition}
             />

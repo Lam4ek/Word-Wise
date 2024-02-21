@@ -14,7 +14,7 @@ import { FolderData } from "../../../types/types";
 
 interface IFolder {
   folder: FolderData;
-  handleNavigation: (folderName: string) => void;
+  handleNavigation: (folderId: string) => void;
 }
 
 const Folder: FC<IFolder> = ({ folder, handleNavigation }) => {
@@ -65,6 +65,8 @@ const Folder: FC<IFolder> = ({ folder, handleNavigation }) => {
       );
       setIsEditing(false); // Finish editing after submitting new name
     }
+    setNewFolderName(folder.name);
+    setIsEditing(false);
   };
 
   const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (event) => {
@@ -77,7 +79,7 @@ const Folder: FC<IFolder> = ({ folder, handleNavigation }) => {
     <div className={styles.cardWrapper}>
       <div
         onContextMenu={handleContextMenu}
-        onClick={() => handleNavigation(folder.name)}
+        onClick={() => handleNavigation(folder.id)}
         className={styles.card}
       >
         <h3>{folder.name.split("")[0].toUpperCase()}</h3>

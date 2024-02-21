@@ -10,12 +10,12 @@ import NotFoundPage from "../NotFoundPage";
 
 const Modules: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { folderName } = useParams<{ folderName: string }>();
+  const { folderId } = useParams<{ folderId: string }>();
 
   const data = useAppSelector((state) =>
     state.userData.folders
       ? state.userData.folders.find(
-          (folder: FolderData) => folder.name === folderName
+          (folder: FolderData) => folder.id === folderId
         )
       : undefined
   );
@@ -23,8 +23,8 @@ const Modules: React.FC = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const handleNavigation = (module: string) => {
-    navigate(`${module}`);
+  const handleNavigation = (moduleId: string) => {
+    navigate(`./${moduleId}`);
   };
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Modules: React.FC = () => {
   return (
     <div>
       <h2 style={{ marginBottom: "10px" }}>Modules</h2>
-      {folderName && !isLoading ? (
+      {folderId && !isLoading ? (
         <div className={styles.cards}>
           {data.modules.map((module: ModuleData) => (
             <Module

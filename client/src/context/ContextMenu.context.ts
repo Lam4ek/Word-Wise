@@ -3,6 +3,7 @@ import { createContext } from "react";
 export interface ContextMenuItem {
   name: string;
   onClick: () => void;
+  subMenu?: any;
 }
 
 interface ContextMenuModel {

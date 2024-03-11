@@ -22,6 +22,10 @@ const Folder: FC<IFolder> = ({ folder, handleNavigation }) => {
   const dispatch = useDispatch();
   const [newFolderName, setNewFolderName] = useState(folder.name);
   const [isEditing, setIsEditing] = useState(false);
+  const [folderColor, setFolderColor] = useState("#58afff");
+  const [folderShadow, setFolderShadow] = useState(
+    "0px 2px 10px 0px rgba(88, 174, 255, 0.9)"
+  );
 
   const contextMenu = useMemo(
     () => [
@@ -40,9 +44,32 @@ const Folder: FC<IFolder> = ({ folder, handleNavigation }) => {
       {
         name: "Change color",
         onClick: () => {},
+        subMenu: [
+          {
+            name: "Red",
+            onClick: () => {
+              setFolderColor("#ff58a0");
+              setFolderShadow("0px 2px 10px 0px rgba(255, 88, 155, 0.9)");
+            },
+          },
+          {
+            name: "Blue",
+            onClick: () => {
+              setFolderColor("#58afff");
+              setFolderShadow("0px 2px 10px 0px rgba(88, 174, 255, 0.9)");
+            },
+          },
+          {
+            name: "Green",
+            onClick: () => {
+              setFolderColor("#71ff58");
+              setFolderShadow("0px 2px 10px 0px rgba(102, 255, 88, 0.9)");
+            },
+          },
+        ],
       },
     ],
-    []
+    [dispatch, folder.id, setIsEditing]
   );
 
   const handleContextMenu = useCallback(
@@ -81,6 +108,7 @@ const Folder: FC<IFolder> = ({ folder, handleNavigation }) => {
         onContextMenu={handleContextMenu}
         onClick={() => handleNavigation(folder.id)}
         className={styles.card}
+        style={{ backgroundColor: folderColor, boxShadow: folderShadow }}
       >
         <h3>{folder.name.split("")[0].toUpperCase()}</h3>
       </div>

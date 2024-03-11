@@ -22,6 +22,10 @@ const Module: React.FC<Module> = ({ module, folderId, handleNavigation }) => {
   const [newModuleName, setNewModuleName] = useState(module.name);
   const { setContextMenu } = useContextMenu();
   const dispatch = useDispatch();
+  const [moduleColor, setModuleColor] = useState("#58afff");
+  const [moduleShadow, setModuleShadow] = useState(
+    "0px 2px 10px 0px rgba(88, 174, 255, 0.9)"
+  );
 
   const contextMenu = useMemo(
     () => [
@@ -40,6 +44,29 @@ const Module: React.FC<Module> = ({ module, folderId, handleNavigation }) => {
       {
         name: "Change color",
         onClick: () => {},
+        subMenu: [
+          {
+            name: "Red",
+            onClick: () => {
+              setModuleColor("#ff58a0");
+              setModuleShadow("0px 2px 10px 0px rgba(255, 88, 155, 0.9)");
+            },
+          },
+          {
+            name: "Blue",
+            onClick: () => {
+              setModuleColor("#58afff");
+              setModuleShadow("0px 2px 10px 0px rgba(88, 174, 255, 0.9)");
+            },
+          },
+          {
+            name: "Green",
+            onClick: () => {
+              setModuleColor("#71ff58");
+              setModuleShadow("0px 2px 10px 0px rgba(102, 255, 88, 0.9)");
+            },
+          },
+        ],
       },
     ],
     []
@@ -79,6 +106,7 @@ const Module: React.FC<Module> = ({ module, folderId, handleNavigation }) => {
     <div className={styles.cardWrapper}>
       <div
         onClick={() => handleNavigation(module.id)}
+        style={{ backgroundColor: moduleColor }}
         className={styles.card}
         onContextMenu={handleContextMenu}
       >

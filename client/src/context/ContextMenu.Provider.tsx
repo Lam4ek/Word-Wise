@@ -9,7 +9,7 @@ export const ContextMenuProvider: FC<PropsWithChildren<{}>> = ({
     []
   );
   const [position, setPosition] = useState<number[]>();
-
+  const [showSubmenu, setShowSubmenu] = useState(false);
   const setContextMenu = useCallback(
     (items: ContextMenuItem[], position: number[]) => {
       setContextMenuItems(items);
@@ -20,6 +20,7 @@ export const ContextMenuProvider: FC<PropsWithChildren<{}>> = ({
 
   const closeMenu = useCallback(() => {
     setPosition(undefined);
+    setShowSubmenu(false);
   }, []);
 
   useEffect(() => {
@@ -41,8 +42,23 @@ export const ContextMenuProvider: FC<PropsWithChildren<{}>> = ({
               key={item.name}
               className={styles.contextMenuItem}
               onClick={item.onClick}
+              onMouseEnter={() => item.subMenu && setShowSubmenu(true)}
+              onMouseLeave={() => setShowSubmenu(false)}
             >
               {item.name}
+              {item.subMenu && showSubmenu && (
+                <ul className={styles.subMenu}>
+                  {item.subMenu.map((subItem: any) => (
+                    <li
+                      key={subItem.name}
+                      className={styles.subMenuItem}
+                      onClick={subItem.onClick}
+                    >
+                      {subItem.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>

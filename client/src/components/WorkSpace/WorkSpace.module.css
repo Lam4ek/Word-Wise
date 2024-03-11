@@ -6,15 +6,11 @@
 .card {
   width: 90px;
   height: 90px;
-  background-color: #58afff;
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  -webkit-box-shadow: 0px 2px 10px 0px rgba(88, 174, 255, 0.9);
-  -moz-box-shadow: 0px 2px 10px 0px rgba(88, 174, 255, 0.9);
-  box-shadow: 0px 2px 10px 0px rgba(88, 174, 255, 0.9);
 }
 
 .newCard {

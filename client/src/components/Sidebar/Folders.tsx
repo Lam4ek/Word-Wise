@@ -9,7 +9,7 @@ function Folders() {
   const navigate = useNavigate();
 
   const foldersNavigation = (folderId: string) => {
-    navigate(`folders/${folderId}`);
+    navigate(`folders/${folderId}/modules`);
   };
 
   return (

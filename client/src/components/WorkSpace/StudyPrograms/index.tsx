@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./StudyPrograms.module.css";
 import {
   PiCardsFill,
@@ -6,11 +5,16 @@ import {
   PiSelectionBackgroundBold,
 } from "react-icons/pi";
 import { GiCycle } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 
-function index() {
+function Index() {
+  const navigate = useNavigate();
+  const handleNavigation = (program: string) => {
+    navigate(`./${program}`);
+  };
   return (
     <div className={styles.programs}>
-      <div>
+      <div onClick={() => handleNavigation("flashcards")}>
         <PiCardsFill style={{ fontSize: "26px" }} />
         <span>Cards</span>
       </div>
@@ -30,4 +34,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

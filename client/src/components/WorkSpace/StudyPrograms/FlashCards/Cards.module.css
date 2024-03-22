@@ -1,0 +1,184 @@
+.cardWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.card {
+  background-color: #fff;
+  height: 70%;
+  width: 80%;
+  box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  word-break: break-all;
+  word-wrap: break-word;
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.flipped {
+  transform: rotateX(180deg);
+}
+
+.textFlipped {
+  transform: scaleY(-1);
+}
+
+.card:not(.animating) {
+  transition: none !important;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.flipped .textContainer {
+  animation: fadeIn 1.2s forwards;
+}
+
+.textContainer {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  animation: fadeOut 1.2s forwards;
+}
+
+.textContainer p {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+}
+
+.textContainer::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f9f9fd;
+}
+
+.textContainer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #d0d0d0;
+}
+
+.textContainer::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: #f9f9fd;
+}
+
+.controlPanel {
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+}
+
+.controlPanel button {
+  float: right;
+}
+
+.slider {
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sliderButton,
+.controlPanel button {
+  box-shadow: 0px 0px 5px -2px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  transition: background-color 0.5s ease;
+}
+
+.controlPanel button:hover {
+  background-color: #edeff4;
+}
+
+.firstStep,
+.lastStep {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: all 0.5s ease-in-out;
+}
+
+.modal {
+  position: relative;
+  background-color: #fff;
+  width: 70%;
+  max-width: 500px;
+  max-height: 500px;
+  padding: 40px 30px;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.underLine {
+  border-bottom: 2px solid #d0d0d0;
+}
+
+.form {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.changeInput {
+  font-size: 18px;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow: auto;
+}
+
+.form div:first-child {
+  margin-bottom: 20px;
+}
+
+.closeForm {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}

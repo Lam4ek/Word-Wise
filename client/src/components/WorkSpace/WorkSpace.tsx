@@ -5,6 +5,7 @@ import Modules from "./StudyModules/Modules";
 import Terms from "./Terms/Terms";
 import { ContextMenuProvider } from "../../context";
 import NotFoundPage from "./NotFoundPage";
+import Cards from "./StudyPrograms/FlashCards/Cards";
 
 const WorkSpace = () => {
   return (
@@ -16,6 +17,10 @@ const WorkSpace = () => {
           <Route
             path='/folders/:folderId/modules/:moduleId'
             element={<Terms />}
+          />
+          <Route
+            path='/folders/:folderId/modules/:moduleId/flashcards'
+            element={<Cards />}
           />
 
           {/* For all non-existent routes */}

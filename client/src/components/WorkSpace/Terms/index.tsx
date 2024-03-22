@@ -64,7 +64,7 @@ const Term: FC<ITerm> = ({ term, index, removeHandler, changeHandler }) => {
               value={newTerm}
             />
           )}
-          <span className={styles.term_line}></span>
+          <span className={styles.underLine}></span>
           <span style={{ fontSize: "12px" }}>term</span>
         </div>
         <div>
@@ -79,7 +79,7 @@ const Term: FC<ITerm> = ({ term, index, removeHandler, changeHandler }) => {
               value={newDefinition}
             />
           )}
-          <span className={styles.term_line}></span>
+          <span className={styles.underLine}></span>
           <span style={{ fontSize: "12px" }}>definition</span>
         </div>
       </div>

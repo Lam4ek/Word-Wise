@@ -255,7 +255,6 @@ const dataSlice = createSlice({
     changeTerm(state, action) {
       const { folderId, moduleId, newTerm, newDefinition, termId } =
         action.payload;
-      console.log(folderId, moduleId, newTerm, newDefinition, termId);
       // Finding the index of the desired folder
       const folderIndex = state.userData.folders.findIndex(
         (folder: FolderData) => folder.id === folderId

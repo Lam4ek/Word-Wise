@@ -106,7 +106,7 @@ const Module: React.FC<Module> = ({ module, folderId, handleNavigation }) => {
     <div className={styles.cardWrapper}>
       <div
         onClick={() => handleNavigation(module.id)}
-        style={{ backgroundColor: moduleColor }}
+        style={{ backgroundColor: moduleColor, boxShadow: moduleShadow }}
         className={styles.card}
         onContextMenu={handleContextMenu}
       >

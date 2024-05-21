@@ -19,6 +19,7 @@ function Folders() {
         {data
           ? data.slice(0, 6).map((folder: FolderData) => (
               <li
+                style={{ color: folder.color }}
                 onClick={() => foldersNavigation(folder.id)}
                 key={Math.random()}
               >

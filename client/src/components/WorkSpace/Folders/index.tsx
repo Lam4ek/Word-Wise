@@ -8,7 +8,11 @@ import {
 } from "react";
 import styles from "../WorkSpace.module.css";
 import { useContextMenu } from "../../../Hooks/useContextMenu";
-import { removeFolder, renameFolder } from "../../../store/dataSlice";
+import {
+  changeColor,
+  removeFolder,
+  renameFolder,
+} from "../../../store/dataSlice";
 import { useDispatch } from "react-redux";
 import { FolderData } from "../../../types/types";
 
@@ -22,9 +26,16 @@ const Folder: FC<IFolder> = ({ folder, handleNavigation }) => {
   const dispatch = useDispatch();
   const [newFolderName, setNewFolderName] = useState(folder.name);
   const [isEditing, setIsEditing] = useState(false);
-  const [folderColor, setFolderColor] = useState("#58afff");
+
+  const hexToRGBA = (hex: string, alpha: string) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `0px 2px 10px 0px rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
+
   const [folderShadow, setFolderShadow] = useState(
-    "0px 2px 10px 0px rgba(88, 174, 255, 0.9)"
+    hexToRGBA(folder.color, "0.9")
   );
 
   const contextMenu = useMemo(
@@ -47,23 +58,23 @@ const Folder: FC<IFolder> = ({ folder, handleNavigation }) => {
         subMenu: [
           {
             name: "Red",
+            color: "#ff58a0",
             onClick: () => {
-              setFolderColor("#ff58a0");
-              setFolderShadow("0px 2px 10px 0px rgba(255, 88, 155, 0.9)");
+              dispatch(changeColor({ folderId: folder.id, color: "#ff58a0" }));
             },
           },
           {
             name: "Blue",
+            color: "#58afff",
             onClick: () => {
-              setFolderColor("#58afff");
-              setFolderShadow("0px 2px 10px 0px rgba(88, 174, 255, 0.9)");
+              dispatch(changeColor({ folderId: folder.id, color: "#58afff" }));
             },
           },
           {
             name: "Green",
+            color: "#71ff58",
             onClick: () => {
-              setFolderColor("#71ff58");
-              setFolderShadow("0px 2px 10px 0px rgba(102, 255, 88, 0.9)");
+              dispatch(changeColor({ folderId: folder.id, color: "#71ff58" }));
             },
           },
         ],
@@ -108,7 +119,7 @@ const Folder: FC<IFolder> = ({ folder, handleNavigation }) => {
         onContextMenu={handleContextMenu}
         onClick={() => handleNavigation(folder.id)}
         className={styles.card}
-        style={{ backgroundColor: folderColor, boxShadow: folderShadow }}
+        style={{ backgroundColor: folder.color, boxShadow: folderShadow }}
       >
         <h3>{folder.name.split("")[0].toUpperCase()}</h3>
       </div>

@@ -1,9 +1,14 @@
 import { createContext } from "react";
 
+export interface SubMenuItem {
+  name: string;
+  color: string;
+  onClick: () => void;
+}
 export interface ContextMenuItem {
   name: string;
   onClick: () => void;
-  subMenu?: any;
+  subMenu?: SubMenuItem[];
 }
 
 interface ContextMenuModel {

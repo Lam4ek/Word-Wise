@@ -1,6 +1,11 @@
 import { FC, PropsWithChildren, useState, useCallback, useEffect } from "react";
-import { ContextMenu, ContextMenuItem } from "./ContextMenu.context";
+import {
+  ContextMenu,
+  ContextMenuItem,
+  SubMenuItem,
+} from "./ContextMenu.context";
 import styles from "./ContextMenu.module.css";
+import { MdOutlineInvertColors } from "react-icons/md";
 
 export const ContextMenuProvider: FC<PropsWithChildren<{}>> = ({
   children,
@@ -40,20 +45,27 @@ export const ContextMenuProvider: FC<PropsWithChildren<{}>> = ({
           {contextMenuItems.map((item) => (
             <li
               key={item.name}
-              className={styles.contextMenuItem}
+              className={
+                item.subMenu
+                  ? styles.contextSubMenuItem
+                  : styles.contextMenuItem
+              }
               onClick={item.onClick}
               onMouseEnter={() => item.subMenu && setShowSubmenu(true)}
-              onMouseLeave={() => setShowSubmenu(false)}
+              onMouseLeave={() => {
+                item.subMenu && setShowSubmenu(false);
+              }}
             >
               {item.name}
               {item.subMenu && showSubmenu && (
                 <ul className={styles.subMenu}>
-                  {item.subMenu.map((subItem: any) => (
+                  {item.subMenu.map((subItem: SubMenuItem) => (
                     <li
                       key={subItem.name}
                       className={styles.subMenuItem}
                       onClick={subItem.onClick}
                     >
+                      <MdOutlineInvertColors color={subItem.color} />
                       {subItem.name}
                     </li>
                   ))}

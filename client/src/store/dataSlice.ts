@@ -17,10 +17,12 @@ const info: Info = {
     {
       id: "folder1",
       name: "Eng",
+      color: "#58afff",
       modules: [
         {
           id: "module1",
           name: "Verbs",
+          color: "#58afff",
           terms: [
             { id: 1, term: "todo", definition: "делать" },
             { id: 2, term: "1", definition: "2" },
@@ -29,6 +31,7 @@ const info: Info = {
         {
           id: "module2",
           name: "adjectives",
+          color: "#58afff",
           terms: [
             { id: 1, term: "Happy", definition: "Счастлив" },
             { id: 2, term: "Busy", definition: "Занят" },
@@ -39,6 +42,7 @@ const info: Info = {
     {
       id: "folder2",
       name: "Datch",
+      color: "#58afff",
       modules: [],
     },
   ],
@@ -91,6 +95,7 @@ const dataSlice = createSlice({
       const newFolder = {
         id: `${Date.now()}`,
         name: newName,
+        color: "#58afff",
         modules: [],
       };
 
@@ -157,6 +162,7 @@ const dataSlice = createSlice({
       const newModule: ModuleData = {
         id: `${Date.now()}`,
         name: newName,
+        color: "#58afff",
         terms: [],
       };
 
@@ -216,6 +222,27 @@ const dataSlice = createSlice({
       // Rename the module
       state.userData.folders[folderIndex].modules[moduleIndex].name =
         newModuleName;
+    },
+
+    changeColor(state, action) {
+      const { folderId, color, moduleId } = action.payload;
+
+      const folderIndex = state.userData.folders.findIndex(
+        (folder: FolderData) => folder.id === folderId
+      );
+
+      // Finding the module index
+      const moduleIndex = state.userData.folders[folderIndex].modules.findIndex(
+        (module: ModuleData) => module.id === moduleId
+      );
+
+      // Переименовываем папку
+      if (folderId && !moduleId) {
+        state.userData.folders[folderIndex].color = color;
+      }
+      if (folderId && moduleId) {
+        state.userData.folders[folderIndex].modules[moduleIndex].color = color;
+      }
     },
 
     addTerm(state, action) {
@@ -344,6 +371,7 @@ export const {
   addModule,
   removeModule,
   renameModule,
+  changeColor,
   removeTerm,
   changeTerm,
   addTerm,

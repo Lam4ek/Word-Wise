@@ -19,12 +19,14 @@ export interface TermData {
 export interface ModuleData {
   id: string;
   name: string;
+  color: string;
   terms: TermData[];
 }
 
 export interface FolderData {
   id: string;
   name: string;
+  color: string;
   modules: ModuleData[];
 }
 

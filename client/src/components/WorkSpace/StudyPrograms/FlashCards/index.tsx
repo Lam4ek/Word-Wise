@@ -9,8 +9,8 @@ import { IoIosArrowForward, IoIosArrowBack, IoMdClose } from "react-icons/io";
 import { FaRandom, FaPen } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { changeTerm } from "../../../../store/dataSlice";
-
-function Cards() {
+import StudyPrograms from "../index";
+function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [isFront, setIsFront] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -198,4 +198,4 @@ function Cards() {
   );
 }
 
-export default Cards;
+export default Index;

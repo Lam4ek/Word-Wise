@@ -12,13 +12,14 @@ function Index() {
   const handleNavigation = (program: string) => {
     navigate(`./${program}`);
   };
+
   return (
     <div className={styles.programs}>
       <div onClick={() => handleNavigation("flashcards")}>
         <PiCardsFill style={{ fontSize: "26px" }} />
         <span>Cards</span>
       </div>
-      <div>
+      <div onClick={() => handleNavigation("memorization")}>
         <GiCycle style={{ fontSize: "26px" }} />
         <span>Memorization</span>
       </div>

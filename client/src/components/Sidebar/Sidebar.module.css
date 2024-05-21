@@ -1,5 +1,5 @@
 .sidebar {
-  height: calc(100% - 65px);
+  height: 100%;
   background-color: #252531;
   width: 20%;
   border-radius: 20px;
@@ -22,7 +22,6 @@
 }
 
 .list li {
-  color: #58afff;
   margin-bottom: 5px;
   max-width: 175px;
   overflow: visible;

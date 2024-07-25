@@ -134,7 +134,7 @@ function Index() {
         )}
 
         <div className={styles.controlPanel}>
-          <button style={{ opacity: "0.4", cursor: "default" }}>
+          <button>
             <FaRandom />
           </button>
 

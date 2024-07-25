@@ -1,0 +1,60 @@
+.card {
+  background-color: #fff;
+  margin: 0 auto;
+  width: 80%;
+  box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  word-break: break-all;
+  word-wrap: break-word;
+  padding: 25px 30px;
+  margin-bottom: 15px;
+}
+
+.definition {
+  border: 1px solid #70707023;
+  border-radius: 8px;
+  padding: 10px 5px;
+  width: 48%;
+}
+
+.unselected__term {
+  border: 2px dashed #70707023;
+  border-radius: 8px;
+  padding: 10px 5px;
+  width: 48%;
+  height: 44px;
+}
+
+.first__empty {
+  border: 1px solid #949eed !important;
+  border-radius: 8px;
+  padding: 10px 5px;
+  width: 48%;
+  height: 44px;
+}
+
+.matched {
+  border: 1px solid #70707023;
+  display: flex;
+  justify-content: space-between;
+}
+
+.term {
+  border: 1px solid #70707023;
+  border-radius: 8px;
+  padding: 10px 10px;
+  display: inline;
+  margin-right: 10px;
+  background-color: transparent;
+}
+
+.terms__container {
+  margin-top: 50px;
+}
+
+.card__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}

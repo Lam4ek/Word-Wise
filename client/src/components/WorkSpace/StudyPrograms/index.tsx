@@ -23,12 +23,15 @@ function Index() {
         <GiCycle style={{ fontSize: "26px" }} />
         <span>Memorization</span>
       </div>
-      <div>
+      <div onClick={() => handleNavigation("test")}>
         <PiFilesFill style={{ fontSize: "26px" }} />
         <span>Test</span>
       </div>
       <div>
-        <PiSelectionBackgroundBold style={{ fontSize: "26px" }} />
+        <PiSelectionBackgroundBold
+          onClick={() => handleNavigation("selection")}
+          style={{ fontSize: "26px" }}
+        />
         <span>Selection</span>
       </div>
     </div>

@@ -1,0 +1,53 @@
+.card {
+  background-color: #fff;
+  margin: 0 auto;
+  height: 85%;
+  width: 80%;
+  box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  word-break: break-all;
+  word-wrap: break-word;
+  padding: 35px 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cards_wrapper {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  animation: fadeOut 1.2s forwards;
+}
+
+.cards_wrapper::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f9f9fd;
+}
+
+.cards_wrapper::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #d0d0d0;
+}
+
+.cards_wrapper::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: #f9f9fd;
+}
+
+.submit__btn button {
+  border: none;
+  padding: 15px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: inherit;
+  font-weight: 700;
+  background-color: #58afff;
+  color: #fff;
+}
+
+.submit__btn {
+  text-align: center;
+  margin-top: 20px;
+}

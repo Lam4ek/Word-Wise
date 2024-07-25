@@ -1,0 +1,57 @@
+.card {
+  background-color: #fff;
+  margin: 0 auto;
+  width: 80%;
+  box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  word-break: break-all;
+  word-wrap: break-word;
+  padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.card__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.term__container {
+  margin-bottom: 50px;
+}
+
+.term__container span {
+  font-size: 11px;
+  color: #707070;
+}
+
+.btn__container {
+  margin-top: 15px;
+}
+
+.btn__container button {
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: inherit;
+  font-weight: 700;
+  background-color: #58afff;
+  color: #fff;
+  float: right;
+}
+
+.answer__input {
+  background-color: #f6f7fb;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.correct {
+  border: 2px solid #94edcf;
+}
+
+.wrong {
+  border: 2px solid #fe7773;
+}

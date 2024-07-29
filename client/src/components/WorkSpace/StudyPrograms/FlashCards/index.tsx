@@ -10,6 +10,7 @@ import { FaRandom, FaPen } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { changeTerm } from "../../../../store/dataSlice";
 import StudyPrograms from "../index";
+import ControlPanel from "./ControlPanel";
 function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [isFront, setIsFront] = useState(true);
@@ -133,31 +134,14 @@ function Index() {
           "Loading..."
         )}
 
-        <div className={styles.controlPanel}>
-          <button>
-            <FaRandom />
-          </button>
-
-          <div className={styles.slider}>
-            <button
-              className={isFirstStep ? styles.firstStep : styles.sliderButton}
-              onClick={handlePreviousCard}
-            >
-              <IoIosArrowBack size={16} />
-            </button>
-
-            <button
-              className={isLastStep ? styles.lastStep : styles.sliderButton}
-              onClick={handleNextCard}
-            >
-              <IoIosArrowForward size={16} />
-            </button>
-          </div>
-
-          <button onClick={() => setIsEditing(!isEditing)}>
-            <FaPen />
-          </button>
-        </div>
+        <ControlPanel
+          isFirstStep={isFirstStep}
+          handlePreviousCard={handlePreviousCard}
+          isLastStep={isLastStep}
+          handleNextCard={handleNextCard}
+          setIsEditing={setIsEditing}
+          isEditing={isEditing}
+        />
       </div>
       {isEditing && (
         <div className={styles.overlay}>

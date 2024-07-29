@@ -180,6 +180,7 @@ function Test() {
                 written={written}
                 setWritten={setWritten}
                 setUpTest={setUpTest}
+                name={module.name}
               />
             </div>
           ) : (

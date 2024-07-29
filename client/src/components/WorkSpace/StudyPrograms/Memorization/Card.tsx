@@ -50,6 +50,12 @@ const Card: FC<Cardprops> = ({
     }, 1500);
   };
 
+  const handleKeyDown = () => (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleAnswer();
+    }
+  };
+
   return (
     <>
       <div className={styles.termWrapper}>
@@ -94,6 +100,7 @@ const Card: FC<Cardprops> = ({
             disabled={isAnswered}
             type='text'
             onChange={(e) => setAnswer(e.target.value)}
+            onKeyDown={handleKeyDown()}
           />
         </div>
 

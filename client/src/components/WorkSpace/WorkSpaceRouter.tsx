@@ -8,6 +8,7 @@ import NotFoundPage from "./NotFoundPage";
 import Cards from "./StudyPrograms/FlashCards";
 import Memorization from "./StudyPrograms/Memorization";
 import Test from "./StudyPrograms/StudyTest";
+import Selection from "./StudyPrograms/Selection";
 
 const WorkSpace = () => {
   return (
@@ -33,6 +34,11 @@ const WorkSpace = () => {
           <Route
             path='/folders/:folderId/modules/:moduleId/test'
             element={<Test />}
+          />
+
+          <Route
+            path='/folders/:folderId/modules/:moduleId/selection'
+            element={<Selection />}
           />
 
           {/* For all non-existent routes */}

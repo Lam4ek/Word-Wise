@@ -27,11 +27,8 @@ function Index() {
         <PiFilesFill style={{ fontSize: "26px" }} />
         <span>Test</span>
       </div>
-      <div>
-        <PiSelectionBackgroundBold
-          onClick={() => handleNavigation("selection")}
-          style={{ fontSize: "26px" }}
-        />
+      <div onClick={() => handleNavigation("selection")}>
+        <PiSelectionBackgroundBold style={{ fontSize: "26px" }} />
         <span>Selection</span>
       </div>
     </div>

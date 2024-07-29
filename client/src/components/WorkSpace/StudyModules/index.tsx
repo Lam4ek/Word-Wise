@@ -148,6 +148,7 @@ const Module: React.FC<Module> = ({ module, folderId, handleNavigation }) => {
           onChange={(e) => setNewModuleName(e.target.value)}
           onKeyDown={handleKeyDown}
           onBlur={() => handleRename(module)}
+          maxLength={18}
           autoFocus
         />
       ) : (

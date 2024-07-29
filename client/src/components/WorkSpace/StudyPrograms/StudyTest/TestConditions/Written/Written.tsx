@@ -42,6 +42,14 @@ const Written: FC<WrittenProps> = ({ terms, score, setScore }) => {
     setAnswers(newAnswers);
   };
 
+  const handleKeyDown =
+    (term: TermData, index: number) =>
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") {
+        handleAnswer(term, index);
+      }
+    };
+
   return (
     <>
       {!loading &&
@@ -58,6 +66,7 @@ const Written: FC<WrittenProps> = ({ terms, score, setScore }) => {
               data-index={index}
               value={answers[index]}
               onChange={(e) => handleInputChange(e.target.value, index)}
+              onKeyDown={handleKeyDown(termData, index)}
               placeholder='Write the definition'
               disabled={confirmed[index]}
             />

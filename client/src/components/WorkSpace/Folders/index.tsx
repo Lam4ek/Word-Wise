@@ -130,6 +130,7 @@ const Folder: FC<IFolder> = ({ folder, handleNavigation }) => {
           value={newFolderName}
           onChange={(e) => setNewFolderName(e.target.value)}
           onKeyDown={handleKeyDown}
+          maxLength={18}
           onBlur={() => handleRename(folder)} // Submit changes when focus is lost
           autoFocus
         />

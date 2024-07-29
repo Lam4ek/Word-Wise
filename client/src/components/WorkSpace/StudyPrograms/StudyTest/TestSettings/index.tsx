@@ -15,6 +15,7 @@ interface ITest {
   written: boolean;
   setWritten: (prop: boolean) => void;
   setUpTest: () => void;
+  name: string;
 }
 
 const TestSettings: FC<ITest> = ({
@@ -29,6 +30,7 @@ const TestSettings: FC<ITest> = ({
   written,
   setWritten,
   setUpTest,
+  name,
 }) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -60,7 +62,7 @@ const TestSettings: FC<ITest> = ({
     <>
       <div className={styles.cardHeader}>
         <div>
-          <h2>Verbs</h2>
+          <h2>{name}</h2>
           <span>Set up your test</span>
         </div>
         <div>

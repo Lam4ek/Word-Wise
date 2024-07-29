@@ -26,12 +26,7 @@ const info: Info = {
           terms: [
             { id: 1, term: "todo", definition: "делать" },
             { id: 2, term: "1", definition: "2" },
-            {
-              id: 3,
-              term: "3",
-              definition:
-                "33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
-            },
+            { id: 3, term: "3", definition: "3" },
             { id: 4, term: "4", definition: "4" },
             { id: 5, term: "5", definition: "5" },
             { id: 6, term: "6", definition: "6" },
@@ -54,7 +49,7 @@ const info: Info = {
     },
     {
       id: "folder2",
-      name: "Datch",
+      name: "Dutch",
       color: "#58afff",
       modules: [],
     },

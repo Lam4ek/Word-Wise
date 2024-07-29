@@ -3,7 +3,7 @@ import "./App.css";
 
 import Header from "./components/Header/index";
 import Sidebar from "./components/Sidebar/index";
-import WorkSpace from "./components/WorkSpace/WorkSpace";
+import WorkSpace from "./components/WorkSpace/WorkSpaceRouter";
 
 import { useAppDispatch, useAppSelector } from "./Hooks";
 import { fetchData } from "./store/dataSlice";

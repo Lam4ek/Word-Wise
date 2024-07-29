@@ -1,0 +1,139 @@
+.selection__container {
+  position: absolute;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: #f6f7fb;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: relative;
+  background-color: #fff;
+  height: 50px;
+  width: 100vw;
+  box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header button {
+  position: absolute;
+  right: 20px;
+  padding: 5px;
+  border: 2px solid #eeeeee82;
+  background: none;
+  border-radius: 7px;
+}
+
+.memoryCard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  width: 80%;
+  margin: auto;
+  height: 740px;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #ffffff;
+  transition: background-color 0.3s, transform 0.3s, border 0.3s;
+  box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.active {
+  border: 2px solid #4a90e2;
+  background-color: #eaf5ff;
+  transform: scale(1.05);
+}
+
+.card:hover {
+  background-color: #f5f4f4;
+}
+
+.matched {
+  border: 2px solid #66ebbe;
+  background-color: #94edcf;
+  border-radius: 10px;
+  animation: zoomOut 0.8s forwards;
+}
+
+.failed {
+  border: 3px solid #fe7773;
+  background-color: #fe787379;
+  animation: shake 0.3s;
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.startScreen__container {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin: 150px auto 0 auto;
+  align-items: center;
+}
+
+.startScreen__container h4 {
+  font-size: 26px;
+  margin: 20px 0;
+  letter-spacing: 0.6px;
+}
+
+.startScreen__container span {
+  text-align: center;
+  font-size: 19px;
+  margin-bottom: 20px;
+  color: #acacac;
+  width: 80%;
+}
+
+.startScreen__container button {
+  border: none;
+  padding: 15px 45px;
+  border-radius: 10px;
+  margin-left: 15px;
+  background-color: inherit;
+  background-color: #58afff;
+  color: #fff;
+  font-weight: 700;
+}

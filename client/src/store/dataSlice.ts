@@ -121,7 +121,6 @@ const dataSlice = createSlice({
     renameFolder: (state, action) => {
       const { folderId, newFolderName } = action.payload;
 
-      // Проверяем, уникально ли новое имя среди существующих папок
       const isNameUnique = !state.userData.folders.some(
         (folder: FolderData) =>
           folder.name === newFolderName && folder.id !== folderId

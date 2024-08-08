@@ -5,11 +5,9 @@ import { useAppSelector } from "../../../../Hooks";
 import { FolderData, ModuleData, TermData } from "../../../../types/types";
 import NotFoundPage from "../../NotFoundPage";
 import styles from "./Cards.module.css";
-import { IoIosArrowForward, IoIosArrowBack, IoMdClose } from "react-icons/io";
-import { FaRandom, FaPen } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { changeTerm } from "../../../../store/dataSlice";
-import StudyPrograms from "../index";
 import ControlPanel from "./ControlPanel";
 function Index() {
   const [isLoading, setIsLoading] = useState(true);
@@ -42,16 +40,9 @@ function Index() {
     }
   }, [module, folder]);
 
-  const {
-    currentStepIndex,
-    step,
-    steps,
-    isFirstStep,
-    isLastStep,
-    goTo,
-    next,
-    back,
-  } = useMultiCards(isLoading ? [] : module.terms);
+  const { step, isFirstStep, isLastStep, next, back } = useMultiCards(
+    isLoading ? [] : module.terms
+  );
 
   const [newTerm, setNewTerm] = useState(step?.term);
   const [newDefinition, setNewDefinition] = useState(step?.definition);

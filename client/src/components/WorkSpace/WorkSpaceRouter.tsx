@@ -1,7 +1,5 @@
 import styles from "./WorkSpace.module.css";
-import Folders from "./Folders/Folders";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Modules from "./StudyModules/Modules";
 import Terms from "./Terms/Terms";
 import { ContextMenuProvider } from "../../context";
 import NotFoundPage from "./NotFoundPage";
@@ -9,8 +7,10 @@ import Cards from "./StudyPrograms/FlashCards";
 import Memorization from "./StudyPrograms/Memorization";
 import Test from "./StudyPrograms/StudyTest";
 import Selection from "./StudyPrograms/Selection";
+import Folders from "./Folders";
+import Modules from "./StudyModules";
 
-const WorkSpace = () => {
+const WorkSpaceRouter = () => {
   return (
     <div className={styles.workspace}>
       <ContextMenuProvider>
@@ -50,4 +50,4 @@ const WorkSpace = () => {
   );
 };
 
-export default WorkSpace;
+export default WorkSpaceRouter;

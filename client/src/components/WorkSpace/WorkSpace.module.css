@@ -34,13 +34,13 @@
   font-size: 34px;
 }
 
-.card h3 {
+.cardTitle {
   color: #ffffff;
   font-weight: 600;
   font-size: 34px;
 }
 
-.cardWrapper span {
+.cardSubTitle {
   position: absolute;
   bottom: -18px;
   font-size: 11px;

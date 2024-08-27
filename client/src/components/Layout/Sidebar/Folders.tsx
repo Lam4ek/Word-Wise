@@ -1,7 +1,7 @@
 import styles from "./Sidebar.module.css";
-import { useAppSelector } from "../../Hooks";
+import { useAppSelector } from "../../../Hooks";
 import { useNavigate } from "react-router-dom";
-import { FolderData } from "../../types/types";
+import { FolderData } from "../../../types/types";
 
 function Folders() {
   const data = useAppSelector((state) => state.userData.folders);

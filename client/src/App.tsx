@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-import Header from "./components/Header/index";
-import Sidebar from "./components/Sidebar/index";
-import WorkSpace from "./components/WorkSpace/WorkSpaceRouter";
+import Header from "./components/Layout/Header/index";
+import Sidebar from "./components/Layout/Sidebar/index";
+import WorkSpace from "./components/Dashboard/WorkSpaceRouter";
 
 import { useAppDispatch, useAppSelector } from "./Hooks";
 import { fetchData } from "./store/dataSlice";

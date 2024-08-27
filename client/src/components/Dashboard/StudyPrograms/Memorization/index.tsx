@@ -6,7 +6,7 @@ import { useAppSelector } from "../../../../Hooks";
 import { FolderData, ModuleData } from "../../../../types/types";
 import Progressbar from "../../../../ui/Progressbar";
 
-import NotFoundPage from "../../NotFoundPage";
+import NotFoundPage from "../../../../pages/NotFoundPage/NotFoundPage";
 import Card from "./Card";
 
 function Memorization() {

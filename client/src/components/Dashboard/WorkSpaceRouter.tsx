@@ -2,7 +2,7 @@ import styles from "./WorkSpace.module.css";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Terms from "./Terms/Terms";
 import { ContextMenuProvider } from "../../context";
-import NotFoundPage from "./NotFoundPage";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import Cards from "./StudyPrograms/FlashCards";
 import Memorization from "./StudyPrograms/Memorization";
 import Test from "./StudyPrograms/StudyTest";

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../../Hooks";
 import { addFolder } from "../../../store/dataSlice";
 import FolderList from "./components/FolderList/FolderList";
-import NotFoundPage from "../NotFoundPage";
+import NotFoundPage from "../../../pages/NotFoundPage/NotFoundPage";
 
 const Folders: FC = () => {
   const [isLoading, setIsLoading] = useState(true);

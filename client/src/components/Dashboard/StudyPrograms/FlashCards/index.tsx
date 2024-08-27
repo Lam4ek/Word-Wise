@@ -3,7 +3,7 @@ import { useMultiCards } from "../../../../Hooks/useMultiCards";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../../Hooks";
 import { FolderData, ModuleData, TermData } from "../../../../types/types";
-import NotFoundPage from "../../NotFoundPage";
+import NotFoundPage from "../../../../pages/NotFoundPage/NotFoundPage";
 import styles from "./Cards.module.css";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch } from "react-redux";

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../../Hooks";
 import { FolderData } from "../../../types/types";
-import NotFoundPage from "../NotFoundPage";
+import NotFoundPage from "../../../pages/NotFoundPage/NotFoundPage";
 import { addModule } from "../../../store/dataSlice";
 
 function Modules() {

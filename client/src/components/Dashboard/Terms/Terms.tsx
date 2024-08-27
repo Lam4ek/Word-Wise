@@ -7,7 +7,7 @@ import { useAppSelector } from "../../../Hooks";
 import { removeTerm, changeTerm, addTerm } from "../../../store/dataSlice";
 import { useDispatch } from "react-redux";
 import { FolderData, ModuleData, TermData } from "../../../types/types";
-import NotFoundPage from "../NotFoundPage";
+import NotFoundPage from "../../../pages/NotFoundPage/NotFoundPage";
 
 const Terms: React.FC = () => {
   const { moduleId, folderId } = useParams<{

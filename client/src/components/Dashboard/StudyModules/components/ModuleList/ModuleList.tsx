@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { FolderData, ModuleData } from "../../../../../types/types";
 import ModuleItem from "../ModuleItem/ModuleItem";
-import styles from "../../../WorkSpace.module.css";
+import styles from "../../../Dashboard.module.css";
 
 interface ModuleListProps {
   data: FolderData;

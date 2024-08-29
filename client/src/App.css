@@ -29,20 +29,3 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-.app-wrapper {
-  max-width: 1170px;
-  width: 100%;
-  background-color: #f6f7fb;
-  height: 730px;
-  border-radius: 10px;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-}
-
-.main-page-wrapper {
-  height: 100%;
-  display: flex;
-  overflow: hidden;
-}

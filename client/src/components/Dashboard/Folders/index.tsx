@@ -5,6 +5,7 @@ import { useAppSelector } from "../../../Hooks";
 import { addFolder } from "../../../store/dataSlice";
 import FolderList from "./components/FolderList/FolderList";
 import NotFoundPage from "../../../pages/NotFoundPage/NotFoundPage";
+import styles from "../Dashboard.module.css";
 
 const Folders: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +30,7 @@ const Folders: FC = () => {
   }
 
   return (
-    <>
+    <div className={styles.container}>
       <h2 style={{ marginBottom: "10px" }}>Folders</h2>
       {!isLoading && folders ? (
         <FolderList
@@ -40,7 +41,7 @@ const Folders: FC = () => {
       ) : (
         <>Loading...</>
       )}
-    </>
+    </div>
   );
 };
 

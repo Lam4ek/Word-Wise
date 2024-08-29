@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
-import styles from "./Test.module.css";
-import TestSettings from "./TestSettings";
-import Matching from "./TestConditions/Matching";
+import styles from "./StudyTest.module.css";
+import TestSettings from "./TestConfiguration/TestSettings";
+import Matching from "./TestConfiguration/TestConditions/Matching";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../../Hooks";
 import { FolderData, ModuleData, TermData } from "../../../../types/types";
-import TrueFalse from "./TestConditions/TrueFalse";
-import MultipleChoice from "./TestConditions/MultipleChoise";
-import Written from "./TestConditions/Written/Written";
+import TrueFalse from "./TestConfiguration/TestConditions/TrueFalse";
+
+import Written from "./TestConfiguration/TestConditions/Written/Written";
 
 import Progressbar from "../../../../ui/Progressbar";
+import MultipleChoice from "./TestConfiguration/TestConditions/MultipleChoise";
 
 function Test() {
   const [questions, setQuestions] = useState("");

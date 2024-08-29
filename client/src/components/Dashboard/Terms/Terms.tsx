@@ -65,7 +65,7 @@ const Terms: React.FC = () => {
   }
 
   return (
-    <div style={{ height: "100%" }}>
+    <div className={styles.container}>
       <StudyPrograms />
       <div className={styles.cards_wrapper}>
         <div>

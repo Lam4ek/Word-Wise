@@ -1,6 +1,6 @@
 import { FC } from "react";
 import FolderItem from "../FolderItem/FolderItem";
-import styles from "../../../WorkSpace.module.css";
+import styles from "../../../Dashboard.module.css";
 import { FolderData } from "../../../../../types/types";
 
 interface FolderListProps {

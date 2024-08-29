@@ -5,7 +5,7 @@ import React, {
   KeyboardEventHandler,
   useEffect,
 } from "react";
-import styles from "../../../WorkSpace.module.css";
+import styles from "../../../Dashboard.module.css";
 import { useDispatch } from "react-redux";
 
 import { hexToRGBA } from "../../../../../utils/hexToRGBA";

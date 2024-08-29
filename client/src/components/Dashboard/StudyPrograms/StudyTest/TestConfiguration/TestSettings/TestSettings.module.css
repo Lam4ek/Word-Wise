@@ -1,0 +1,42 @@
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.settingsWrapper {
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.settings {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text__input {
+  background-color: #eeeeee82;
+  padding: 13px 25px;
+  width: 70px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.text__input::-webkit-outer-spin-button,
+.text__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.settingsBtn {
+  background-color: #4255ff;
+  border: none;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-top: auto;
+  width: 100px;
+  margin-left: auto;
+}

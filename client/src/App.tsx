@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-import Header from "./components/Layout/Header/index";
-import Sidebar from "./components/Layout/Sidebar/index";
-import WorkSpace from "./components/Dashboard/WorkSpaceRouter";
-
 import { useAppDispatch, useAppSelector } from "./Hooks";
 import { fetchData } from "./store/dataSlice";
 import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./routes/AppRouter";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
@@ -19,15 +16,9 @@ function App() {
 
   return (
     <div className='App'>
-      <div className='app-wrapper'>
-        <BrowserRouter>
-          <Header />
-          <div className='main-page-wrapper'>
-            <Sidebar />
-            <WorkSpace />
-          </div>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./Memorization.module.css";
+import styles from "./styles/Memorization.module.css";
 import { useMultiCards } from "../../../../Hooks/useMultiCards";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../../Hooks";
@@ -7,7 +7,7 @@ import { FolderData, ModuleData } from "../../../../types/types";
 import Progressbar from "../../../../ui/Progressbar";
 
 import NotFoundPage from "../../../../pages/NotFoundPage/NotFoundPage";
-import Card from "./Card";
+import Card from "./components/Card";
 
 function Memorization() {
   const [isLoading, setIsLoading] = useState(true);

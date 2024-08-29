@@ -1,6 +1,8 @@
+import { useState } from "react";
 import styles from "./Header.module.css";
 
 function Header() {
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <div className={styles.header}>
       <ul>
@@ -11,7 +13,11 @@ function Header() {
       </ul>
       <div className={styles.profile}>
         <button>Upgrade</button>
-        <span>JG</span>
+        {isLogin ? (
+          <span className={styles.profile__img}>JG</span>
+        ) : (
+          <span className={styles.login__btn}>Login</span>
+        )}
       </div>
     </div>
   );

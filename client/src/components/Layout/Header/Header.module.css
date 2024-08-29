@@ -36,7 +36,7 @@
   cursor: pointer;
 }
 
-.profile span {
+.profile__img {
   font-size: 18px;
   margin-left: 10px;
   border-radius: 100%;
@@ -44,4 +44,11 @@
   color: #ffffff;
   padding: 7px 10px;
   cursor: pointer;
+}
+
+.login__btn {
+  margin-left: 15px;
+  cursor: pointer;
+  color: #e85780;
+  font-weight: 800;
 }

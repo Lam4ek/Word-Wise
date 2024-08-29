@@ -6,6 +6,7 @@ import { useAppSelector } from "../../../Hooks";
 import { FolderData } from "../../../types/types";
 import NotFoundPage from "../../../pages/NotFoundPage/NotFoundPage";
 import { addModule } from "../../../store/dataSlice";
+import styles from "../Dashboard.module.css";
 
 function Modules() {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,7 +39,7 @@ function Modules() {
     return <NotFoundPage />;
   }
   return (
-    <>
+    <div className={styles.container}>
       <h2 style={{ marginBottom: "10px" }}>Modules</h2>
       {folderId && !isLoading ? (
         <ModuleList
@@ -49,7 +50,7 @@ function Modules() {
       ) : (
         <>Loading...</>
       )}
-    </>
+    </div>
   );
 }
 

@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../../Hooks";
 import { FolderData, ModuleData, TermData } from "../../../../types/types";
 import NotFoundPage from "../../../../pages/NotFoundPage/NotFoundPage";
-import styles from "./Cards.module.css";
+import styles from "./styles/Cards.module.css";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { changeTerm } from "../../../../store/dataSlice";
-import ControlPanel from "./ControlPanel";
+import ControlPanel from "./components/ControlPanel";
 function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [isFront, setIsFront] = useState(true);

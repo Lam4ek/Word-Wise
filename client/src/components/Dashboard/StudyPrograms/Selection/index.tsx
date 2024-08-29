@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Selection.module.css";
+import styles from "./styles/Selection.module.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../../Hooks";
 import { Card } from "../../../../gameLogic/Selection/Card";
 import { Game } from "../../../../gameLogic/Selection/Game";
-import Header from "./Header";
+import Header from "./components/Header";
 import { FolderData, ModuleData } from "../../../../types/types";
-import StartScreen from "./StartScreen";
+import StartScreen from "./components/StartScreen";
 
 const Selection: React.FC = () => {
   const { folderId, moduleId } = useParams<{

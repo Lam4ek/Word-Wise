@@ -8,7 +8,7 @@ import {
 } from "react";
 import { useDispatch } from "react-redux";
 
-import styles from "../../../WorkSpace.module.css";
+import styles from "../../../Dashboard.module.css";
 import { useContextMenu } from "../../../../../Hooks";
 import { FolderData } from "../../../../../types/types";
 import { renameFolder } from "../../../../../store/dataSlice";

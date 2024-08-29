@@ -1,28 +1,28 @@
-import React from "react";
+// src/components/AuthForm.tsx
+import React, { useState } from "react";
 import styles from "./AuthForm.module.css";
+import SigninForm from "./SigninForm";
+import SignupForm from "./SignupForm";
+import ToggleContainer from "./ToggleContainer";
+import classNames from "classnames";
 
-function AuthForm() {
+const AuthForm: React.FC = () => {
+  const [isSignup, setIsSignup] = useState<boolean>(false);
+
+  const handleToggle = () => {
+    setIsSignup((prev) => !prev);
+  };
+
   return (
-    <div className={styles.container}>
-      <form>
-        <h1>Create Account</h1>
-        <div className='social-icons'>
-          <a href='#' className='icon'>
-            <i className='fa-brands fa-google-plus-g'></i>
-          </a>
-          <a href='#' className='icon'>
-            <i className='fa-brands fa-facebook-f'></i>
-          </a>
-          <a href='#' className='icon'>
-            <i className='fa-brands fa-github'></i>
-          </a>
-          <a href='#' className='icon'>
-            <i className='fa-brands fa-linkedin-in'></i>
-          </a>
-        </div>
-      </form>
+    <div
+      className={classNames(styles.container, {
+        [styles.active]: isSignup,
+      })}
+    >
+      <ToggleContainer handleToggle={handleToggle} isSignup={isSignup} />
+      {isSignup ? <SignupForm /> : <SigninForm />}
     </div>
   );
-}
+};
 
 export default AuthForm;

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../../Hooks";
 import { addFolder } from "../../../store/dataSlice";
-import FolderList from "./components/FolderList/FolderList";
+import FolderList from "./components/FolderList";
 import NotFoundPage from "../../../pages/NotFoundPage/NotFoundPage";
 import styles from "../Dashboard.module.css";
 

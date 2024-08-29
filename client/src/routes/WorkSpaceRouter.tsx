@@ -1,12 +1,12 @@
 import styles from "../components/Dashboard/Dashboard.module.css";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Terms from "../components/Dashboard/Terms/Terms";
+import Terms from "../components/Dashboard/Terms";
 import { ContextMenuProvider } from "../context";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
-import Cards from "../components/Dashboard/StudyPrograms/FlashCards";
-import Memorization from "../components/Dashboard/StudyPrograms/Memorization";
-import Test from "../components/Dashboard/StudyPrograms/StudyTest";
-import Selection from "../components/Dashboard/StudyPrograms/Selection";
+import Cards from "../components/Dashboard/QuizStation/FlashCards";
+import Memorization from "../components/Dashboard/QuizStation/Memorization";
+import Test from "../components/Dashboard/QuizStation/StudyTest";
+import Selection from "../components/Dashboard/QuizStation/Selection";
 import Folders from "../components/Dashboard/Folders";
 import Modules from "../components/Dashboard/StudyModules";
 import Layout from "../components/Layout/Layout";

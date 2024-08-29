@@ -1,24 +1,17 @@
 import { useEffect, useState } from "react";
-import ModuleList from "./components/ModuleList/ModuleList";
+import ModuleList from "./components/ModuleList";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../../Hooks";
-import { FolderData } from "../../../types/types";
 import NotFoundPage from "../../../pages/NotFoundPage/NotFoundPage";
 import { addModule } from "../../../store/dataSlice";
 import styles from "../Dashboard.module.css";
+import { useModuleData } from "../../../Hooks/useModuleData";
 
 function Modules() {
   const [isLoading, setIsLoading] = useState(true);
   const { folderId } = useParams<{ folderId: string }>();
 
-  const data = useAppSelector((state) =>
-    state.userData.folders
-      ? state.userData.folders.find(
-          (folder: FolderData) => folder.id === folderId
-        )
-      : undefined
-  );
+  const { folder } = useModuleData();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,14 +21,14 @@ function Modules() {
   };
 
   const handleAddModule = () => {
-    dispatch(addModule({ folderId: data.id }));
+    dispatch(addModule({ folderId: folder.id }));
   };
 
   useEffect(() => {
-    setIsLoading(!data);
-  }, [data]);
+    setIsLoading(!folder);
+  }, [folder]);
 
-  if (!data) {
+  if (!folder) {
     return <NotFoundPage />;
   }
   return (
@@ -43,7 +36,7 @@ function Modules() {
       <h2 style={{ marginBottom: "10px" }}>Modules</h2>
       {folderId && !isLoading ? (
         <ModuleList
-          data={data}
+          data={folder}
           handleNavigation={handleNavigation}
           handleAddModule={handleAddModule}
         />

@@ -1,9 +1,9 @@
 // src/components/AuthForm.tsx
 import React, { useState } from "react";
 import styles from "./AuthForm.module.css";
-import SigninForm from "./SigninForm";
-import SignupForm from "./SignupForm";
-import ToggleContainer from "./ToggleContainer";
+import SigninForm from "./components/SigninForm";
+import SignupForm from "./components/SignupForm";
+import ToggleContainer from "./components/ToggleContainer";
 import classNames from "classnames";
 
 const AuthForm: React.FC = () => {

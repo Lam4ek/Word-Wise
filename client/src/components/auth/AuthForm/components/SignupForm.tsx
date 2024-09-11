@@ -1,6 +1,6 @@
 // src/components/SignupForm.tsx
 import React from "react";
-import styles from "./AuthForm.module.css";
+import styles from "../AuthForm.module.css";
 import { FaGoogle, FaFacebook, FaGithub, FaLinkedinIn } from "react-icons/fa";
 
 const SignupForm: React.FC = () => {

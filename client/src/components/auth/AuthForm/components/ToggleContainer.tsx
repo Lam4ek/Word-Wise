@@ -1,6 +1,6 @@
 // src/components/ToggleContainer.tsx
 import React from "react";
-import styles from "./AuthForm.module.css";
+import styles from "../AuthForm.module.css";
 import classNames from "classnames";
 
 interface ToggleContainerProps {

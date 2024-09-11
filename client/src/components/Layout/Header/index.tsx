@@ -1,8 +1,14 @@
 import { useState } from "react";
 import styles from "./Header.module.css";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate(`./auth`);
+  };
   return (
     <div className={styles.header}>
       <ul>
@@ -16,7 +22,9 @@ function Header() {
         {isLogin ? (
           <span className={styles.profile__img}>JG</span>
         ) : (
-          <span className={styles.login__btn}>Login</span>
+          <span onClick={handleNavigation} className={styles.login__btn}>
+            Login
+          </span>
         )}
       </div>
     </div>

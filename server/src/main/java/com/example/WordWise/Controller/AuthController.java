@@ -1,5 +1,7 @@
 package com.example.WordWise.Controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +30,20 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public String login(@RequestBody User user) {
+	public ResponseEntity<String> login(@RequestBody User user) {
 		// Логика аутентификации пользователя
-		return "User logged in: " + user.getUsername();
+		Optional<User> existingUser = userService.getUserByEmail(user.getEmail());
+
+		if (existingUser.isPresent()) {
+			User foundUser = existingUser.get();
+			if (foundUser.getPassword().equals(user.getPassword())) {
+				return ResponseEntity.ok("User logged in: " + foundUser.getUsername());
+			} else {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid password");
+			}
+		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+		}
 	}
+
 }

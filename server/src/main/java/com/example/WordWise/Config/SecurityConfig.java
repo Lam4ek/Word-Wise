@@ -16,7 +16,9 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
 				.authorizeRequests(requests -> requests
-						.requestMatchers("/register", "/login").permitAll() // Разрешить доступ без аутентификации
+						.requestMatchers("/register", "/login").permitAll() // Разрешить доступ
+																																																		// без
+																																																		// аутентификации
 						.anyRequest().authenticated()) // Остальные запросы требуют аутентификацию
 				.httpBasic(withDefaults());
 		return http.build();

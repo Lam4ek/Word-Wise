@@ -1,10 +1,10 @@
 // src/components/AuthForm.tsx
 import React, { useState } from "react";
 import styles from "./AuthForm.module.css";
-import SigninForm from "./components/SigninForm";
-import SignupForm from "./components/SignupForm";
 import ToggleContainer from "./components/ToggleContainer";
 import classNames from "classnames";
+import SignupForm from "./components/SignupForm";
+import SigninForm from "./components/SigninForm";
 
 const AuthForm: React.FC = () => {
   const [isSignup, setIsSignup] = useState<boolean>(false);

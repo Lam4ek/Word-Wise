@@ -1,6 +1,8 @@
 package com.example.WordWise.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.WordWise.Model.User;
@@ -21,6 +23,14 @@ public class UserService {
 		}
 		user.setUuid(UUID.randomUUID().toString().replace("-", "").substring(0, 24));
 		userRepository.save(user);
+	}
+
+	public User loginUser(String username, String password) {
+		User user = userRepository.findByUsername(username);
+		if (user == null || !user.getUsername().equals(username) || user.getPassword().equals(password)) {
+			throw new BadCredentialsException("Invalid credentials");
+		}
+		return user;
 	}
 
 	// Проверка наличия email в базе данных
@@ -47,6 +57,10 @@ public class UserService {
 
 	public Optional<User> getUserById(String uuid) {
 		return userRepository.findById(uuid);
+	}
+
+	public Optional<User> getUserByEmail(String email) {
+		return userRepository.findByEmail(email);
 	}
 
 	public void deleteUser(String uuid) {

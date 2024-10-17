@@ -9,7 +9,7 @@ import com.example.WordWise.Model.User;
 import com.example.WordWise.Repository.UserRepository;
 
 import java.util.Optional;
-import java.util.UUID; // Импортируйте UUID
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -17,33 +17,36 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	public void registerUser(User user) {
 		if (userRepository.existsByEmail(user.getEmail())) {
 			throw new IllegalArgumentException("Email already exists!");
 		}
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setUuid(UUID.randomUUID().toString().replace("-", "").substring(0, 24));
+		user.setPassword(encodedPassword);
 		userRepository.save(user);
 	}
 
-	public User loginUser(String username, String password) {
-		User user = userRepository.findByUsername(username);
-		if (user == null || !user.getUsername().equals(username) || user.getPassword().equals(password)) {
+	public User loginUser(String email, String password) {
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new BadCredentialsException("Invalid credentials"));
+		if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
 			throw new BadCredentialsException("Invalid credentials");
 		}
 		return user;
 	}
 
-	// Проверка наличия email в базе данных
 	private boolean emailExists(String email) {
 		return userRepository.findByEmail(email).isPresent();
 	}
 
-	// Обновление пользователя
 	public User updateUser(String uuid, User user) {
 		User existingUser = userRepository.findById(uuid)
 				.orElseThrow(() -> new RuntimeException("User not found"));
 
-		// Если email изменен, проверяем его уникальность
 		if (!existingUser.getEmail().equals(user.getEmail()) && emailExists(user.getEmail())) {
 			throw new IllegalArgumentException("Email is already in use");
 		}

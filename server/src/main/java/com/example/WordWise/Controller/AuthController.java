@@ -1,10 +1,9 @@
 package com.example.WordWise.Controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +20,6 @@ public class AuthController {
 	@PostMapping("/register")
 	public ResponseEntity<String> registerUser(@RequestBody User user) {
 		try {
-			// Вызываем метод через инжектированный объект
 			userService.registerUser(user);
 			return ResponseEntity.ok("User registered successfully!");
 		} catch (IllegalArgumentException e) {
@@ -31,18 +29,11 @@ public class AuthController {
 
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody User user) {
-		// Логика аутентификации пользователя
-		Optional<User> existingUser = userService.getUserByEmail(user.getEmail());
-
-		if (existingUser.isPresent()) {
-			User foundUser = existingUser.get();
-			if (foundUser.getPassword().equals(user.getPassword())) {
-				return ResponseEntity.ok("User logged in: " + foundUser.getUsername());
-			} else {
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid password");
-			}
-		} else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+		try {
+			User loggedInUser = userService.loginUser(user.getEmail(), user.getPassword());
+			return ResponseEntity.ok("User logged in: " + loggedInUser.getUsername());
+		} catch (BadCredentialsException e) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
 		}
 	}
 

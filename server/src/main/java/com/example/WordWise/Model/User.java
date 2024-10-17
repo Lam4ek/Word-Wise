@@ -10,7 +10,7 @@ import jakarta.persistence.Column;
 public class User {
 
 	@Id
-	private String uuid; // UUID в качестве идентификатора
+	private String uuid;
 
 	@Column(unique = true, nullable = false)
 	private String email;
@@ -18,11 +18,9 @@ public class User {
 	private String username;
 	private String password;
 
-	// Конструктор по умолчанию (нужен для JPA)
 	public User() {
 	}
 
-	// Геттеры и сеттеры
 	public String getUuid() {
 		return uuid;
 	}
